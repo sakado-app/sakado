@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Sakado - Connexion</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <img id="app-logo" src="assets/imgs/logo.png" />
+
+  <h1>Se connecter</h1>
+  <h2>Utilisez vos identifiants Pronote (<b>ne pas confondre avec les identifiants ENT</b>)</h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="login()" id="login-form" novalidate>
+    <ion-item>
+      <ion-label floating>Nom d'utilisateur</ion-label>
+      <ion-input #username id="username" [readonly]="logging" formControlName="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Mot de passe</ion-label>
+      <ion-input #password id="password" type="password" [readonly]="logging" formControlName="password"></ion-input>
+    </ion-item>
+    <ion-item class="link-item">
+      <ion-label floating>Etablissement</ion-label>
+      <ion-select [(ngModel)]="selectedLink" [ngModelOptions]="{standalone: true}" [disabled]="logging">
+        <ion-option value="loading">Selectionner...</ion-option>
+        <ion-option *ngFor="let link of links" [value]="link.link">{{ link.name }}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <button ion-button [disabled]="loginForm.invalid || selectedLink == 'loading'" id="login">Se Connecter</button>
+  </form>
+</ion-content>

@@ -1,0 +1,41 @@
+page-login {
+
+}
+
+ion-content {
+  padding: 8vh 25px 25px;
+  text-align: center;
+}
+
+#app-logo {
+  width: 92px;
+  height: 92px;
+
+  margin-top: 40px;
+}
+
+#login, #logging {
+  margin: 25px auto;
+  display: block;
+}
+
+h2 {
+  margin-bottom: 25px;
+  margin-top: 10px !important;
+  padding-left: 25px;
+  padding-right: 25px;
+  font-size: 1.6rem;
+}
+
+.sakado-input {
+  margin-bottom: 5px;
+}
+
+ion-item {
+  padding-left: 25px !important;
+  padding-right: 25px !important;
+}
+
+.link-item {
+  margin-top: 15px;
+}
