@@ -1,17 +1,22 @@
+
 <ion-menu [content]="content">
   <ion-header>
-    (Ici on mettra les infos utilisateur)
+      <img id="avatar" src="{{ auth.user == null ? 'assets/imgs/default_user.png' : auth.user.avatar }}" />
+      <span id="user">
+            {{ auth.user == null ? 'Non connecté' : auth.user.name }}
+            <br/>
+            <b>{{ auth.user == null ? '' : auth.user.classe }}</b>
+        </span>
   </ion-header>
 
   <ion-content>
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+      <button menuClose ion-item *ngFor="let p of pages" [class.hidden]="p.auth !== undefined && p.auth !== auth.logged" (click)="openPage(p)">
+        {{ p.title }}
       </button>
     </ion-list>
   </ion-content>
 
 </ion-menu>
 
-<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

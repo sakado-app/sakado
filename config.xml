@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="fr.litarvan.sakado" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="fr.litarvan.sakado" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Sakado</name>
     <description>An app for school.</description>
     <author email="adrien1975@live.fr" href="https://github.com/Litarvan">Adrien 'Litarvan' Navratil</author>

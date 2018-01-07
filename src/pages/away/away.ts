@@ -15,36 +15,34 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+import { Component, OnInit } from '@angular/core';
+import { PronoteService } from '../../app/pronote.service';
 
-ion-card {
-    text-align: left;
-}
+@Component({
+    selector: 'page-away',
+    templateUrl: 'away.html'
+})
+export class AwayPage implements OnInit
+{
+    away = null;
 
-ion-card-header {
-    font-weight: bold;
-}
+    constructor(private pronote: PronoteService)
+    {
+    }
 
-.hidden {
-    display: none;
-}
+    ngOnInit()
+    {
+        this.pronote.away().then(result => this.away = result);
+    }
 
-#avatar, #user {
-    margin-left: 15px;
-    display: block;
-}
+    private DAYS = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
 
-#avatar {
-    border-radius: 25px;
-    object-fit: cover;
-    width: 50px;
-    height: 50px;
-    margin-top: 20px;
-}
+    date(cours)
+    {
+        let dayName = this.DAYS[cours.weekday];
+        let from = (cours.hour + 8) + 'h';
+        let to = (cours.hour + 8 + length) + 'h';
 
-#user {
-    font-family: "Roboto", "Lato", "Arial", serif;
-    font-size: 18px;
-    margin-top: 13px;
-    margin-bottom: 15px;
-    max-width: 80%;
+        return dayName + ' ' + cours.day + '  ' + from + '-' + to;
+    }
 }

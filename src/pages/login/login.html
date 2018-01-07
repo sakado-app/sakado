@@ -1,3 +1,20 @@
+<!--
+    Sakado, an app for school
+    Copyright (c) 2017-2018 Adrien 'Litarvan' Navratil
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
 <ion-header>
   <ion-navbar color="primary">
     <button ion-button menuToggle>
@@ -11,7 +28,7 @@
   <img id="app-logo" src="assets/imgs/logo.png" />
 
   <h1>Se connecter</h1>
-  <h2>Utilisez vos identifiants Pronote (<b>ne pas confondre avec les identifiants ENT</b>)</h2>
+  <h2 id="login-help">Utilisez vos identifiants Pronote (<b>ne pas confondre avec les identifiants ENT</b>)</h2>
 
   <form [formGroup]="loginForm" (ngSubmit)="login()" id="login-form" novalidate>
     <ion-item>
@@ -20,7 +37,7 @@
     </ion-item>
     <ion-item>
       <ion-label floating>Mot de passe</ion-label>
-      <ion-input #password id="password" type="password" [readonly]="logging" formControlName="password"></ion-input>
+      <ion-input #password id="password" type="password" [readonly]="logging" [clearOnEdit]="!logging" formControlName="password"></ion-input>
     </ion-item>
     <ion-item class="link-item">
       <ion-label floating>Etablissement</ion-label>
@@ -30,6 +47,6 @@
       </ion-select>
     </ion-item>
 
-    <button ion-button [disabled]="loginForm.invalid || selectedLink == 'loading'" id="login">Se Connecter</button>
+    <button ion-button [disabled]="loginForm.invalid || selectedLink == 'loading' || logging" id="login">Se Connecter</button>
   </form>
 </ion-content>

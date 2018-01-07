@@ -15,36 +15,19 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
-ion-card {
-    text-align: left;
+#away-content {
+    margin-top: 5px;
 }
 
-ion-card-header {
-    font-weight: bold;
+.away {
+    color: red;
 }
 
-.hidden {
-    display: none;
+.week-name {
+    color: #333;
+    padding: 15px 5px 5px 15px;
 }
 
-#avatar, #user {
-    margin-left: 15px;
-    display: block;
-}
-
-#avatar {
-    border-radius: 25px;
-    object-fit: cover;
-    width: 50px;
-    height: 50px;
-    margin-top: 20px;
-}
-
-#user {
-    font-family: "Roboto", "Lato", "Arial", serif;
-    font-size: 18px;
-    margin-top: 13px;
-    margin-bottom: 15px;
-    max-width: 80%;
+#away-title {
+    font-size: 1.9rem;
 }

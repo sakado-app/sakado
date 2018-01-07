@@ -15,36 +15,24 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+import { Component } from '@angular/core';
+import { NavParams, ViewController } from 'ionic-angular';
 
-ion-card {
-    text-align: left;
-}
+@Component({
+    selector: 'page-license',
+    templateUrl: 'license.html'
+})
+export class LicensePage
+{
+    content;
 
-ion-card-header {
-    font-weight: bold;
-}
+    constructor(public params: NavParams, public view: ViewController)
+    {
+        this.content = this.params.get('content');
+    }
 
-.hidden {
-    display: none;
-}
-
-#avatar, #user {
-    margin-left: 15px;
-    display: block;
-}
-
-#avatar {
-    border-radius: 25px;
-    object-fit: cover;
-    width: 50px;
-    height: 50px;
-    margin-top: 20px;
-}
-
-#user {
-    font-family: "Roboto", "Lato", "Arial", serif;
-    font-size: 18px;
-    margin-top: 13px;
-    margin-bottom: 15px;
-    max-width: 80%;
+    dismiss()
+    {
+        this.view.dismiss();
+    }
 }

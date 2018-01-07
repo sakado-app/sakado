@@ -1,7 +1,3 @@
-page-login {
-
-}
-
 ion-content {
   padding: 8vh 25px 25px;
   text-align: center;
@@ -19,7 +15,7 @@ ion-content {
   display: block;
 }
 
-h2 {
+#login-help {
   margin-bottom: 25px;
   margin-top: 10px !important;
   padding-left: 25px;
@@ -31,7 +27,7 @@ h2 {
   margin-bottom: 5px;
 }
 
-ion-item {
+#login-form ion-item {
   padding-left: 25px !important;
   padding-right: 25px !important;
 }
