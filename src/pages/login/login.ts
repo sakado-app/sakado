@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { AfterViewInit, Component, OnInit, ViewChildren } from '@angular/core';
-import { AlertController, NavController } from 'ionic-angular';
+import { AlertController, LoadingController, NavController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PronoteService } from '../../app/pronote.service';
 import { AuthService } from '../../app/auth.service';
@@ -47,7 +47,7 @@ export class LoginPage implements OnInit, AfterViewInit
         ])
     });
 
-    constructor(public navCtrl: NavController, public alert: AlertController, public pronote: PronoteService, public auth: AuthService)
+    constructor(public navCtrl: NavController, public alert: AlertController, public loading: LoadingController, public pronote: PronoteService, public auth: AuthService)
     {
     }
 
@@ -79,6 +79,10 @@ export class LoginPage implements OnInit, AfterViewInit
     login()
     {
         this.logging = true;
+        let loading = this.loading.create({
+            content: 'Connexion en cours'
+        });
+        loading.present();
 
         const username = this.loginForm.get('username').value;
         const password = this.loginForm.get('password').value;
@@ -94,8 +98,13 @@ export class LoginPage implements OnInit, AfterViewInit
                 throw new Error('Erreur inconnue');
             }
         })().then(() => {
+            loading.dismiss();
+
             this.navCtrl.setRoot(NextPage);
+            this.logging = false;
         }).catch(err => {
+            loading.dismiss();
+
             this.alert.create({
                 title: 'Erreur',
                 subTitle: err.message,

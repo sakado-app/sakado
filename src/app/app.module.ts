@@ -33,6 +33,7 @@ import { AboutPage } from '../pages/about/about';
 import { LogoutPage } from '../pages/logout/logout';
 import { AwayPage } from '../pages/away/away';
 import { LicensePage } from '../pages/license/license';
+import { ApiService } from './api.service';
 
 export function authServiceFactory(auth: AuthService): Function
 {
@@ -69,6 +70,7 @@ export function authServiceFactory(auth: AuthService): Function
         StatusBar,
         SplashScreen,
         Push,
+        ApiService,
         AuthService,
         PronoteService,
 

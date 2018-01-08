@@ -17,7 +17,7 @@
  */
 import { Component } from '@angular/core';
 import { VERSION } from '../../app/main';
-import { ModalController } from 'ionic-angular';
+import { LoadingController, ModalController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { LicensePage } from '../license/license';
 
@@ -30,7 +30,7 @@ export class AboutPage
     version = VERSION;
     licenses: Array<{ name: string, url: string }>;
 
-    constructor(private modal: ModalController, private http: HttpClient)
+    constructor(private modal: ModalController, private http: HttpClient, public loading: LoadingController)
     {
         this.licenses = [
             {
@@ -69,13 +69,20 @@ export class AboutPage
             url = license.url;
         }
 
+        let loading = this.loading.create({
+            content: 'Telechargement de la license'
+        });
+        await loading.present();
+
         let content = await this.http.get(url, {
             responseType: 'text'
         }).toPromise();
 
+        await loading.dismiss();
+
         let modal = this.modal.create(LicensePage, {
             content: content
         });
-        modal.present();
+        await modal.present();
     }
 }

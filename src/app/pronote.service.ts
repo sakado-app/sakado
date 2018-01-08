@@ -21,14 +21,14 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 import { AuthService } from './auth.service';
 import { Subject } from 'rxjs/Subject';
-import { API_URL } from './main';
+import { ApiService } from './api.service';
 
 @Injectable()
 export class PronoteService
 {
     loading = new Subject<boolean>();
 
-    constructor(private http: HttpClient, private auth: AuthService)
+    constructor(private http: HttpClient, private auth: AuthService, private api: ApiService)
     {
     }
 
@@ -58,6 +58,6 @@ export class PronoteService
 
     get(request: string, params = {}): Promise<any>
     {
-        return this.http.get(`${API_URL}/${request}`, params).toPromise();
+        return this.http.get(`${this.api.url}/${request}`, params).toPromise();
     }
 }

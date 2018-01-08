@@ -19,7 +19,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import 'rxjs/add/operator/toPromise';
-import { API_URL } from './main';
+import { ApiService } from './api.service';
 
 @Injectable()
 export class AuthService
@@ -29,13 +29,13 @@ export class AuthService
     user = null;
     logged = false;
 
-    constructor(private http: HttpClient)
+    constructor(private http: HttpClient, private api: ApiService)
     {
     }
 
     async login(username: string, password: string, link: string): Promise<boolean>
     {
-        let result = await this.http.get(`${API_URL}/auth/login`, {
+        let result = await this.http.get(`${this.api.url}/auth/login`, {
             params: {
                 username: username,
                 password: password,
@@ -57,6 +57,9 @@ export class AuthService
 
     async refresh(): Promise<any>
     {
+        // Loading API URL
+        await this.api.load();
+
         const token = localStorage.getItem('sakado.token');
 
         if (token == null)
@@ -64,7 +67,7 @@ export class AuthService
             return false;
         }
 
-        let result = await this.http.get(`${API_URL}/auth/validate`, {
+        let result = await this.http.get(`${this.api.url}/auth/validate`, {
             headers: {
                 token: token
             }
@@ -81,7 +84,7 @@ export class AuthService
 
     async logout()
     {
-        await this.http.get(`${API_URL}/auth/logout`, {
+        await this.http.get(`${this.api.url}/auth/logout`, {
             headers: {
                 token: this.token
             }

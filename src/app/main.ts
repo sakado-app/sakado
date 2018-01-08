@@ -19,7 +19,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app.module';
 
-export const VERSION = 'Alpha 0.0.1';
-export const API_URL = 'http://127.0.0.1:17334';
+export const VERSION = 'Alpha 0.0.2';
+export const PROXY_URL = 'http://salondesdevs.io:15774';
 
 platformBrowserDynamic().bootstrapModule(AppModule);
