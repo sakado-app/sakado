@@ -41,7 +41,7 @@ export class AwayPage implements OnInit
     {
         let dayName = this.DAYS[cours.weekday];
         let from = (cours.hour + 8) + 'h';
-        let to = (cours.hour + 8 + length) + 'h';
+        let to = (cours.hour + 8 + cours.length) + 'h';
 
         return dayName + ' ' + cours.day + '  ' + from + '-' + to;
     }
