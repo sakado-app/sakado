@@ -13,8 +13,8 @@ export class ApiService
 
     async load()
     {
-        this.url = await this.http.get(`${PROXY_URL}/get`, {
+        this.url = "http://" + await this.http.get(`${PROXY_URL}/get`, {
             responseType: 'text'
-        }).toPromise();
+        }).toPromise() + ":17334";
     }
 }
