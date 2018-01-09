@@ -34,10 +34,11 @@ import { LogoutPage } from '../pages/logout/logout';
 import { AwayPage } from '../pages/away/away';
 import { LicensePage } from '../pages/license/license';
 import { ApiService } from './api.service';
+import { NotesPage } from '../pages/notes/notes';
 
 export function authServiceFactory(auth: AuthService): Function
 {
-    return () => auth.refresh();
+    return () => auth.refresh().catch(err => console.warn(`Couldn't refresh : ${err}`));
 }
 
 @NgModule({
@@ -48,7 +49,8 @@ export function authServiceFactory(auth: AuthService): Function
         AboutPage,
         LogoutPage,
         AwayPage,
-        LicensePage
+        LicensePage,
+        NotesPage
     ],
     imports: [
         BrowserModule,
@@ -64,7 +66,8 @@ export function authServiceFactory(auth: AuthService): Function
         AboutPage,
         LogoutPage,
         AwayPage,
-        LicensePage
+        LicensePage,
+        NotesPage
     ],
     providers: [
         StatusBar,

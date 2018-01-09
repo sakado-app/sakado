@@ -27,7 +27,7 @@
 <ion-content>
     <ion-card *ngIf="next != null">
         <ion-card-header>
-            {{ next.subject }} - {{ next.salle }}
+            {{ next.subject }} <span *ngIf="next.salle !== undefined && next.salle != '' && !next.salle.startsWith('<') && !next.salle.startsWith('[')">- {{ next.salle }}</span>
         </ion-card-header>
 
         <ion-card-content>

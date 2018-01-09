@@ -42,6 +42,11 @@ export class PronoteService
         return this.withToken('next');
     }
 
+    notes(): Promise<any>
+    {
+        return this.withToken('notes');
+    }
+
     links(): Promise<any>
     {
         return this.get('links');
