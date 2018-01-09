@@ -18,8 +18,15 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app.module';
+import { enableProdMode } from '@angular/core';
 
 export const VERSION = 'Alpha 0.1.0';
 export const PROXY_URL = 'http://salondesdevs.io:15774';
+export const DEBUG = false;
+
+if (!DEBUG)
+{
+    enableProdMode();
+}
 
 platformBrowserDynamic().bootstrapModule(AppModule);

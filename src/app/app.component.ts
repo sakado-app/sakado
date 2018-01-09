@@ -28,6 +28,8 @@ import { AwayPage } from '../pages/away/away';
 import { LogoutPage } from '../pages/logout/logout';
 import { AboutPage } from '../pages/about/about';
 import { NotesPage } from '../pages/notes/notes';
+import { VERSION } from './main';
+import { ApiService } from './api.service';
 
 @Component({
     templateUrl: 'app.html'
@@ -40,7 +42,7 @@ export class SakadoApp implements OnInit
 
     pages: Array<{ title: string, component: any, auth?: boolean }>;
 
-    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public push: Push, public alertCtrl: AlertController, public auth: AuthService)
+    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public push: Push, public alertCtrl: AlertController, public auth: AuthService, public api: ApiService)
     {
         this.initializeApp();
 
@@ -58,17 +60,50 @@ export class SakadoApp implements OnInit
 
     ngOnInit()
     {
+        let currentSplit = VERSION.split('.');
+        let serverSplit = this.api.version.split('.');
+
+        let error = null;
+
         if (this.auth.error !== null)
         {
-            return this.alertCtrl.create({
+            error = {
                 title: 'Erreur majeure',
                 message: this.auth.error,
+                fatal: true
+            };
+        }
+        else if (parseInt(currentSplit[1]) < parseInt(serverSplit[1]))
+        {
+            error = {
+                title: 'Nouvelle version',
+                message: 'Une nouvelle version majeure de Sakado est disponible. La mise a jour est necessaire pour pouvoir utiliser l\'application !',
+                fatal: true
+            };
+        }
+        else if (parseInt(currentSplit[2]) < parseInt(serverSplit[2]))
+        {
+            error = {
+                title: 'Nouvelle version',
+                message: 'Une nouvelle version mineure de Sakado est disponible. Elle permet de regler quelques bugs, mais est facultative',
+                fatal: false
+            }
+        }
+
+        if (error != null)
+        {
+            return this.alertCtrl.create({
+                title: error.title,
+                message: error.message,
                 buttons: [
-                    {
+                    error.fatal ? {
                         text: 'Quitter',
                         handler: () => {
                             this.platform.exitApp();
                         }
+                    } : {
+                        text: 'Continuer',
+                        role: 'cancel'
                     }
                 ]
             }).present();
