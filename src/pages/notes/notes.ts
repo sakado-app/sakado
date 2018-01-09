@@ -15,18 +15,30 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { Component, OnInit } from '@angular/core';
+import { PronoteService } from '../../app/pronote.service';
 
-import { AppModule } from './app.module';
-import { enableProdMode } from '@angular/core';
-
-export const VERSION = 'Alpha 0.1.0';
-export const PROXY_URL = 'http://salondesdevs.io:15774';
-export const DEBUG = false;
-
-if (!DEBUG)
+@Component({
+    selector: 'page-notes',
+    templateUrl: 'notes.html'
+})
+export class NotesPage implements OnInit
 {
-    enableProdMode();
-}
+    notes = [];
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+    userMoyenne = '';
+    classMoyenne = '';
+
+    constructor(private pronote: PronoteService)
+    {
+    }
+
+    ngOnInit()
+    {
+        this.pronote.notes().then(data => {
+            this.notes = data.lastNotes;
+            this.userMoyenne = data.moyennes[0];
+            this.classMoyenne = data.moyennes[1];
+        });
+    }
+}

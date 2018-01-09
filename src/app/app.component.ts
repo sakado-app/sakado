@@ -15,7 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertController, Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -27,11 +27,14 @@ import { NextPage } from '../pages/next/next';
 import { AwayPage } from '../pages/away/away';
 import { LogoutPage } from '../pages/logout/logout';
 import { AboutPage } from '../pages/about/about';
+import { NotesPage } from '../pages/notes/notes';
+import { VERSION } from './main';
+import { ApiService } from './api.service';
 
 @Component({
     templateUrl: 'app.html'
 })
-export class SakadoApp
+export class SakadoApp implements OnInit
 {
     @ViewChild(Nav) nav: Nav;
 
@@ -39,7 +42,7 @@ export class SakadoApp
 
     pages: Array<{ title: string, component: any, auth?: boolean }>;
 
-    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public push: Push, public alertCtrl: AlertController, public auth: AuthService)
+    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public push: Push, public alertCtrl: AlertController, public auth: AuthService, public api: ApiService)
     {
         this.initializeApp();
 
@@ -47,11 +50,64 @@ export class SakadoApp
 
         this.pages = [
             { title: 'Se connecter', component: LoginPage, auth: false },
-            { title: 'Profs absents', component: AwayPage, auth: true },
             { title: 'Prochain cours', component: NextPage, auth: true },
+            { title: 'Profs absents', component: AwayPage, auth: true },
+            { title: 'Notes', component: NotesPage, auth: true },
             { title: 'Se deconnecter', component: LogoutPage, auth: true },
             { title: 'A Propos', component: AboutPage }
         ]
+    }
+
+    ngOnInit()
+    {
+        let currentSplit = VERSION.split('.');
+        let serverSplit = this.api.version.split('.');
+
+        let error = null;
+
+        if (this.auth.error !== null)
+        {
+            error = {
+                title: 'Erreur majeure',
+                message: this.auth.error,
+                fatal: true
+            };
+        }
+        else if (parseInt(currentSplit[1]) < parseInt(serverSplit[1]))
+        {
+            error = {
+                title: 'Nouvelle version',
+                message: 'Une nouvelle version majeure de Sakado est disponible. La mise a jour est necessaire pour pouvoir utiliser l\'application !',
+                fatal: true
+            };
+        }
+        else if (parseInt(currentSplit[2]) < parseInt(serverSplit[2]))
+        {
+            error = {
+                title: 'Nouvelle version',
+                message: 'Une nouvelle version mineure de Sakado est disponible. Elle permet de regler quelques bugs, mais est facultative',
+                fatal: false
+            }
+        }
+
+        if (error != null)
+        {
+            return this.alertCtrl.create({
+                title: error.title,
+                message: error.message,
+                buttons: [
+                    error.fatal ? {
+                        text: 'Quitter',
+                        handler: () => {
+                            this.platform.exitApp();
+                        }
+                    } : {
+                        text: 'Continuer',
+                        role: 'cancel'
+                    }
+                ]
+            }).present();
+        }
     }
 
     initializeApp()
@@ -88,7 +144,7 @@ export class SakadoApp
                 if (data.additionalData.foreground)
                 {
                     let confirmAlert = this.alertCtrl.create({
-                        title: 'Nouvelle notification',
+                        title: data.title,
                         message: data.message,
                         buttons: [
                             {
@@ -134,6 +190,11 @@ export class SakadoApp
         if (data.type.toLowerCase() === 'away')
         {
             this.nav.setRoot(AwayPage);
+        }
+
+        if (data.type.toLowerCase() === 'notes')
+        {
+            this.nav.setRoot(NotesPage);
         }
     }
 }

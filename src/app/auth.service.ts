@@ -28,6 +28,7 @@ export class AuthService
     deviceToken = 'none';
     user = null;
     logged = false;
+    error = null;
 
     constructor(private http: HttpClient, private api: ApiService)
     {
@@ -58,7 +59,15 @@ export class AuthService
     async refresh(): Promise<any>
     {
         // Loading API URL
-        await this.api.load();
+        try
+        {
+            await this.api.load();
+        }
+        catch (err)
+        {
+            this.error = 'Impossible de se connecter à Internet';
+            return false;
+        }
 
         const token = localStorage.getItem('sakado.token');
 
@@ -67,16 +76,23 @@ export class AuthService
             return false;
         }
 
-        let result = await this.http.get(`${this.api.url}/auth/validate`, {
-            headers: {
-                token: token
-            }
-        }).toPromise();
-
-        if (result['success'])
+        try
         {
-            this.log(result);
-            return true;
+            let result = await this.http.get(`${this.api.url}/auth/validate`, {
+                headers: {
+                    token: token
+                }
+            }).toPromise();
+
+            if (result['success'])
+            {
+                this.log(result);
+                return true;
+            }
+        }
+        catch (err)
+        {
+            this.error = 'Impossible de contacter le serveur Sakado, une maintenance est probablement en cours';
         }
 
         return false;
