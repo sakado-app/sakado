@@ -27,12 +27,12 @@
 <ion-content>
     <ion-card *ngIf="next != null">
         <ion-card-header>
-            {{ next.name }} <span *ngIf="next.salle !== undefined && next.salle != ''">- {{ next.salle }}</span>
+            {{ next.name }} <span *ngIf="next.room !== undefined && next.room != ''">- {{ next.room }}</span>
         </ion-card-header>
 
         <ion-card-content>
             {{ getDate() }}<br/>
-            {{ next.prof }}
+            {{ next.teacher }}
         </ion-card-content>
     </ion-card>
 </ion-content>

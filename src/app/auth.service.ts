@@ -121,7 +121,7 @@ export class AuthService
                 query: `query {
                     user(token: "${this.token}") {
                         name
-                        classe
+                        studentClass
                         avatar
                     }
                 }`

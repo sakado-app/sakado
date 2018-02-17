@@ -25,34 +25,34 @@
 </ion-header>
 
 <ion-content>
-    <ion-card id="moyennes">
+    <ion-card id="averages">
         <ion-item>
             <h1>Moyenne</h1>
         </ion-item>
 
         <ion-item class="moyenne">
-            Eleve <ion-badge item-end>{{ moyennes.eleve }}</ion-badge>
+            Eleve <ion-badge item-end>{{ averages.student }}</ion-badge>
         </ion-item>
         <ion-item class="moyenne">
-            Classe <ion-badge item-end>{{ moyennes.classe }}</ion-badge>
+            Classe <ion-badge item-end>{{ averages.studentClass }}</ion-badge>
         </ion-item>
     </ion-card>
 
     <h3 id="last-notes">Dernières notes</h3>
 
-    <div id="notes-content" *ngFor="let note of notes">
+    <div id="notes-content" *ngFor="let mark of marks">
         <ion-card>
             <ion-item id="note-title">
-                <h2>{{ note.subject }}</h2>
+                <h2>{{ mark.subject }}</h2>
             </ion-item>
 
             <ion-item>
                 <ion-row>
                     <ion-col id="note-date">
-                        <p>{{ getDate(note) }}</p>
+                        <p>{{ getDate(mark) }}</p>
                     </ion-col>
                     <ion-col id="note-value">
-                        {{ note.note }}
+                        {{ mark.mark }}
                     </ion-col>
                 </ion-row>
             </ion-item>

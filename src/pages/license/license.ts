@@ -26,7 +26,7 @@ export class LicensePage
 {
     content;
 
-    constructor(public params: NavParams, public view: ViewController)
+    constructor(private params: NavParams, private view: ViewController)
     {
         this.content = this.params.get('content');
     }

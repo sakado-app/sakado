@@ -21,12 +21,12 @@ import { date } from '../../app/util';
 
 @Component({
     selector: 'page-notes',
-    templateUrl: 'notes.html'
+    templateUrl: 'marks.html'
 })
-export class NotesPage implements OnInit
+export class MarksPage implements OnInit
 {
-    notes = [];
-    moyennes = {};
+    marks = [];
+    averages = {};
 
     constructor(private api: ApiService)
     {
@@ -35,24 +35,24 @@ export class NotesPage implements OnInit
     ngOnInit()
     {
         this.api.userQuery(`{
-            lastNotes {
+            lastMarks {
                 subject
-                note
+                mark
                 time
             }
             
-            moyennes {
-                eleve
-                classe
+            averages {
+                student
+                studentClass
             }
         }`).then(result => {
-            this.notes = result.lastNotes;
-            this.moyennes = result.moyennes;
+            this.marks = result.lastMarks;
+            this.averages = result.averages;
         });
     }
 
-    getDate(note)
+    getDate(mark)
     {
-        return date(new Date(note.time), false, true, false);
+        return date(new Date(mark.time), false, true, false);
     }
 }

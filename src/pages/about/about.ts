@@ -30,7 +30,7 @@ export class AboutPage
     version = VERSION;
     licenses: Array<{ name: string, url: string }>;
 
-    constructor(private modal: ModalController, private http: HttpClient, public loading: LoadingController)
+    constructor(private modal: ModalController, private http: HttpClient, private loading: LoadingController)
     {
         this.licenses = [
             {

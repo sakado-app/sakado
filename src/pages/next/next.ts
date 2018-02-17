@@ -34,15 +34,15 @@ export class NextPage implements OnInit
     ngOnInit()
     {
         this.api.userQuery(`{
-            nextCours {
+            nextLesson {
                 name
-                prof
-                salle
+                teacher
+                room
                 
                 from
                 to
             }
-        }`).then(result => this.next = result.nextCours);
+        }`).then(result => this.next = result.nextLesson);
     }
 
     getDate()

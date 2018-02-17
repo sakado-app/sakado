@@ -40,7 +40,7 @@ export class AwayPage implements OnInit
                 
                 content {
                     name
-                    prof
+                    teacher
                     
                     from
                 }
@@ -48,9 +48,9 @@ export class AwayPage implements OnInit
         }`).then(result => this.away = result.away);
     }
 
-    coursDate(cours)
+    coursDate(lesson)
     {
-        return date(new Date(cours.from), true);
+        return date(new Date(lesson.from), true);
     }
 
     weekDate(week)

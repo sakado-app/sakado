@@ -27,7 +27,7 @@ import { NextPage } from '../pages/next/next';
 import { AwayPage } from '../pages/away/away';
 import { LogoutPage } from '../pages/logout/logout';
 import { AboutPage } from '../pages/about/about';
-import { NotesPage } from '../pages/notes/notes';
+import { MarksPage } from '../pages/marks/marks';
 import { VERSION } from './main';
 import { ServerService } from './server.service';
 
@@ -42,7 +42,7 @@ export class SakadoApp implements OnInit
 
     pages: Array<{ title: string, component: any, auth?: boolean }>;
 
-    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public push: Push, public alertCtrl: AlertController, public auth: AuthService, public server: ServerService)
+    constructor(private platform: Platform, private statusBar: StatusBar, private splashScreen: SplashScreen, private push: Push, private alertCtrl: AlertController, public auth: AuthService, private server: ServerService)
     {
         this.initializeApp();
 
@@ -52,7 +52,7 @@ export class SakadoApp implements OnInit
             { title: 'Se connecter', component: LoginPage, auth: false },
             { title: 'Prochain cours', component: NextPage, auth: true },
             { title: 'Profs absents', component: AwayPage, auth: true },
-            { title: 'Notes', component: NotesPage, auth: true },
+            { title: 'Notes', component: MarksPage, auth: true },
             { title: 'Se deconnecter', component: LogoutPage, auth: true },
             { title: 'A Propos', component: AboutPage }
         ]
@@ -192,9 +192,9 @@ export class SakadoApp implements OnInit
             this.nav.setRoot(AwayPage);
         }
 
-        if (data.type.toLowerCase() === 'notes')
+        if (data.type.toLowerCase() === 'mark')
         {
-            this.nav.setRoot(NotesPage);
+            this.nav.setRoot(MarksPage);
         }
     }
 }

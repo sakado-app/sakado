@@ -47,7 +47,7 @@ export class LoginPage implements OnInit, AfterViewInit
         ])
     });
 
-    constructor(public navCtrl: NavController, public alert: AlertController, public loading: LoadingController, public api: ApiService, public auth: AuthService)
+    constructor(private navCtrl: NavController, private alert: AlertController, private loading: LoadingController, private api: ApiService, private auth: AuthService)
     {
     }
 
