@@ -19,24 +19,24 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import 'rxjs/add/operator/toPromise';
-import { ApiService } from './api.service';
+import { ServerService } from './server.service';
 
 @Injectable()
 export class AuthService
 {
     token = '';
     deviceToken = 'none';
-    user = null;
     logged = false;
     error = null;
+    user = null;
 
-    constructor(private http: HttpClient, private api: ApiService)
+    constructor(private http: HttpClient, private server: ServerService)
     {
     }
 
     async login(username: string, password: string, link: string): Promise<boolean>
     {
-        let result = await this.http.get(`${this.api.url}/auth/login`, {
+        let result = await this.http.get(`${this.server.url}/auth/login`, {
             params: {
                 username: username,
                 password: password,
@@ -47,7 +47,7 @@ export class AuthService
 
         if (result['success'])
         {
-            this.log(result);
+            await this.log(result);
             localStorage.setItem('sakado.token', this.token);
 
             return true;
@@ -61,7 +61,7 @@ export class AuthService
         // Loading API URL
         try
         {
-            await this.api.load();
+            await this.server.load();
         }
         catch (err)
         {
@@ -78,7 +78,7 @@ export class AuthService
 
         try
         {
-            let result = await this.http.get(`${this.api.url}/auth/validate`, {
+            let result = await this.http.get(`${this.server.url}/auth/validate`, {
                 headers: {
                     token: token
                 }
@@ -86,7 +86,7 @@ export class AuthService
 
             if (result['success'])
             {
-                this.log(result);
+                await this.log(result);
                 return true;
             }
         }
@@ -100,7 +100,7 @@ export class AuthService
 
     async logout()
     {
-        await this.http.get(`${this.api.url}/auth/logout`, {
+        await this.http.get(`${this.server.url}/auth/logout`, {
             headers: {
                 token: this.token
             }
@@ -111,15 +111,21 @@ export class AuthService
         this.user = null;
     }
 
-    protected log(result)
+    protected async log(result)
     {
         this.token = result['token'];
-        this.user = {
-            name: result['name'],
-            classe: result['classe'],
-            avatar: result['avatar']
-        };
-
         this.logged = true;
+
+        this.user = (await this.http.get<any>(`${this.server.url}/graphql`, {
+            params: {
+                query: `query {
+                    user(token: "${this.token}") {
+                        name
+                        classe
+                        avatar
+                    }
+                }`
+            }
+        }).toPromise()).user;
     }
 }

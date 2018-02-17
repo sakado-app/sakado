@@ -1,34 +1,31 @@
 import { Injectable } from '@angular/core';
+import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
-import { DEBUG, PROXY_URL } from './main';
+import { ServerService } from './server.service';
 
 @Injectable()
 export class ApiService
 {
-    url = '';
-    version = '';
-
-    constructor(private http: HttpClient)
+    constructor(private http: HttpClient, private auth: AuthService, private server: ServerService)
     {
+
     }
 
-    async load()
+    async userQuery(query: string): Promise<any>
     {
-        if (DEBUG)
-        {
-            this.url = 'http://127.0.0.1:17334/'
-        }
-        else
-        {
-            this.url = "http://" + await this.http.get(`${PROXY_URL}/get`, {
-                responseType: 'text'
-            }).toPromise() + ":17334";
-        }
+        return (await this.query(`
+            query {
+                user(token: "${this.auth.token}") ${query}
+            }
+        `)).user;
+    }
 
-        try
-        {
-            this.version = (await this.http.get<any>(`${this.url}/version`).toPromise()).version;
-        }
-        catch (e) {}
+    query(query: string): Promise<any>
+    {
+        return this.http.get<any>(`${this.server.url}/graphql`, {
+            params: {
+                query: query
+            }
+        }).toPromise();
     }
 }

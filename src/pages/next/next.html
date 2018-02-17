@@ -27,11 +27,11 @@
 <ion-content>
     <ion-card *ngIf="next != null">
         <ion-card-header>
-            {{ next.subject }} <span *ngIf="next.salle !== undefined && next.salle != '' && !next.salle.startsWith('<') && !next.salle.startsWith('[')">- {{ next.salle }}</span>
+            {{ next.name }} <span *ngIf="next.salle !== undefined && next.salle != ''">- {{ next.salle }}</span>
         </ion-card-header>
 
         <ion-card-content>
-            {{ next.date }}<br/>
+            {{ getDate() }}<br/>
             {{ next.prof }}
         </ion-card-content>
     </ion-card>

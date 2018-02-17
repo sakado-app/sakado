@@ -18,9 +18,9 @@
 import { AfterViewInit, Component, OnInit, ViewChildren } from '@angular/core';
 import { AlertController, LoadingController, NavController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PronoteService } from '../../app/pronote.service';
 import { AuthService } from '../../app/auth.service';
 import { NextPage } from '../next/next';
+import { ApiService } from '../../app/api.service';
 
 @Component({
     selector: 'page-login',
@@ -47,7 +47,7 @@ export class LoginPage implements OnInit, AfterViewInit
         ])
     });
 
-    constructor(public navCtrl: NavController, public alert: AlertController, public loading: LoadingController, public pronote: PronoteService, public auth: AuthService)
+    constructor(public navCtrl: NavController, public alert: AlertController, public loading: LoadingController, public api: ApiService, public auth: AuthService)
     {
     }
 
@@ -67,7 +67,14 @@ export class LoginPage implements OnInit, AfterViewInit
     {
         try
         {
-            this.links = await this.pronote.links() || [];
+            this.links = (await this.api.query(`
+                query {
+                    links {
+                        name
+                        link
+                    }
+                }
+            `)).links || [];
         }
         catch (e)
         {

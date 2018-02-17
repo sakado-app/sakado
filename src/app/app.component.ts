@@ -29,7 +29,7 @@ import { LogoutPage } from '../pages/logout/logout';
 import { AboutPage } from '../pages/about/about';
 import { NotesPage } from '../pages/notes/notes';
 import { VERSION } from './main';
-import { ApiService } from './api.service';
+import { ServerService } from './server.service';
 
 @Component({
     templateUrl: 'app.html'
@@ -42,7 +42,7 @@ export class SakadoApp implements OnInit
 
     pages: Array<{ title: string, component: any, auth?: boolean }>;
 
-    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public push: Push, public alertCtrl: AlertController, public auth: AuthService, public api: ApiService)
+    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public push: Push, public alertCtrl: AlertController, public auth: AuthService, public server: ServerService)
     {
         this.initializeApp();
 
@@ -61,7 +61,7 @@ export class SakadoApp implements OnInit
     ngOnInit()
     {
         let currentSplit = VERSION.split('.');
-        let serverSplit = this.api.version.split('.');
+        let serverSplit = this.server.version.split('.');
 
         let error = null;
 

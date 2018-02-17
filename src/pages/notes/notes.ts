@@ -16,7 +16,8 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { Component, OnInit } from '@angular/core';
-import { PronoteService } from '../../app/pronote.service';
+import { ApiService } from '../../app/api.service';
+import { date } from '../../app/util';
 
 @Component({
     selector: 'page-notes',
@@ -25,20 +26,33 @@ import { PronoteService } from '../../app/pronote.service';
 export class NotesPage implements OnInit
 {
     notes = [];
+    moyennes = {};
 
-    userMoyenne = '';
-    classMoyenne = '';
-
-    constructor(private pronote: PronoteService)
+    constructor(private api: ApiService)
     {
     }
 
     ngOnInit()
     {
-        this.pronote.notes().then(data => {
-            this.notes = data.lastNotes;
-            this.userMoyenne = data.moyennes[0];
-            this.classMoyenne = data.moyennes[1];
+        this.api.userQuery(`{
+            lastNotes {
+                subject
+                note
+                time
+            }
+            
+            moyennes {
+                eleve
+                classe
+            }
+        }`).then(result => {
+            this.notes = result.lastNotes;
+            this.moyennes = result.moyennes;
         });
+    }
+
+    getDate(note)
+    {
+        return date(new Date(note.time), false, true, false);
     }
 }

@@ -16,7 +16,8 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { Component, OnInit } from '@angular/core';
-import { PronoteService } from '../../app/pronote.service';
+import { ApiService } from '../../app/api.service';
+import { date } from '../../app/util';
 
 @Component({
     selector: 'page-next',
@@ -26,12 +27,29 @@ export class NextPage implements OnInit
 {
     next = null;
 
-    constructor(private pronote: PronoteService)
+    constructor(private api: ApiService)
     {
     }
 
     ngOnInit()
     {
-        this.pronote.next().then(result => this.next = result);
+        this.api.userQuery(`{
+            nextCours {
+                name
+                prof
+                salle
+                
+                from
+                to
+            }
+        }`).then(result => this.next = result.nextCours);
+    }
+
+    getDate()
+    {
+        let from = new Date(this.next.from);
+        let to = new Date(this.next.to);
+
+        return date(from) + ' ' + from.getHours() + 'h-' + to.getHours() + 'h';
     }
 }

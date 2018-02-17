@@ -26,15 +26,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Push } from '@ionic-native/push';
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from './auth.service';
-import { PronoteService } from './pronote.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NextPage } from '../pages/next/next';
 import { AboutPage } from '../pages/about/about';
 import { LogoutPage } from '../pages/logout/logout';
 import { AwayPage } from '../pages/away/away';
 import { LicensePage } from '../pages/license/license';
-import { ApiService } from './api.service';
+import { ServerService } from './server.service';
 import { NotesPage } from '../pages/notes/notes';
+import { ApiService } from './api.service';
 
 export function authServiceFactory(auth: AuthService): Function
 {
@@ -73,9 +73,9 @@ export function authServiceFactory(auth: AuthService): Function
         StatusBar,
         SplashScreen,
         Push,
-        ApiService,
+        ServerService,
         AuthService,
-        PronoteService,
+        ApiService,
 
         {
             provide: APP_INITIALIZER,

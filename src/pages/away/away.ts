@@ -16,7 +16,8 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { Component, OnInit } from '@angular/core';
-import { PronoteService } from '../../app/pronote.service';
+import { ApiService } from '../../app/api.service';
+import { date } from '../../app/util';
 
 @Component({
     selector: 'page-away',
@@ -26,23 +27,34 @@ export class AwayPage implements OnInit
 {
     away = null;
 
-    constructor(private pronote: PronoteService)
+    constructor(private api: ApiService)
     {
     }
 
     ngOnInit()
     {
-        this.pronote.away().then(result => this.away = result);
+        this.api.userQuery(`{
+            away {
+                from
+                to
+                
+                content {
+                    name
+                    prof
+                    
+                    from
+                }
+            }
+        }`).then(result => this.away = result.away);
     }
 
-    private DAYS = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-
-    date(cours)
+    coursDate(cours)
     {
-        let dayName = this.DAYS[cours.weekday];
-        let from = (cours.hour + 8) + 'h';
-        let to = (cours.hour + 8 + cours.length) + 'h';
+        return date(new Date(cours.from), true);
+    }
 
-        return dayName + ' ' + cours.day + '  ' + from + '-' + to;
+    weekDate(week)
+    {
+        return date(new Date(week.from), false, false, true) + ' - ' + date(new Date(week.to), false, true);
     }
 }

@@ -15,18 +15,37 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { DEBUG, PROXY_URL } from './main';
 
-import { AppModule } from './app.module';
-import { enableProdMode } from '@angular/core';
-
-export const VERSION = 'Alpha 0.2.0';
-export const PROXY_URL = 'http://salondesdevs.io:15774';
-export const DEBUG = true;
-
-if (!DEBUG)
+@Injectable()
+export class ServerService
 {
-    enableProdMode();
-}
+    url = '';
+    version = '';
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+    constructor(private http: HttpClient)
+    {
+    }
+
+    async load()
+    {
+        if (DEBUG)
+        {
+            this.url = 'http://127.0.0.1:17334/'
+        }
+        else
+        {
+            this.url = "http://" + await this.http.get(`${PROXY_URL}/get`, {
+                responseType: 'text'
+            }).toPromise() + ":17334";
+        }
+
+        try
+        {
+            this.version = (await this.http.get<any>(`${this.url}/version`).toPromise()).version;
+        }
+        catch (e) {}
+    }
+}

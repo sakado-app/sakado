@@ -27,10 +27,10 @@
 <ion-content>
     <div id="away-content" *ngIf="away !== null">
         <div *ngFor="let week of away">
-            <div class="week-name">{{ week.from }}</div>
+            <div class="week-name">{{ weekDate(week) }}</div>
             <ion-card *ngFor="let cours of week.content">
                 <ion-card-header id="away-title">{{ cours.prof }} - <span class="away">ABSENT</span></ion-card-header>
-                <ion-card-content>{{ date(cours) }} <b>/</b> <i>{{ cours.name }}</i></ion-card-content>
+                <ion-card-content>{{ coursDate(cours) }} <b>/</b> <i>{{ cours.name }}</i></ion-card-content>
             </ion-card>
         </div>
     </div>
