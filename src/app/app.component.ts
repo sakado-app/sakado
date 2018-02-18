@@ -30,6 +30,7 @@ import { AboutPage } from '../pages/about/about';
 import { MarksPage } from '../pages/marks/marks';
 import { VERSION } from './main';
 import { ServerService } from './server.service';
+import { HomeworksPage } from '../pages/homeworks/homeworks';
 
 @Component({
     templateUrl: 'app.html'
@@ -53,6 +54,7 @@ export class SakadoApp implements OnInit
             { title: 'Prochain cours', component: NextPage, auth: true },
             { title: 'Profs absents', component: AwayPage, auth: true },
             { title: 'Notes', component: MarksPage, auth: true },
+            { title: 'Devoirs', component: HomeworksPage, auth: true },
             { title: 'Se deconnecter', component: LogoutPage, auth: true },
             { title: 'A Propos', component: AboutPage }
         ]

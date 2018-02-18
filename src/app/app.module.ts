@@ -35,6 +35,7 @@ import { LicensePage } from '../pages/license/license';
 import { ServerService } from './server.service';
 import { MarksPage } from '../pages/marks/marks';
 import { ApiService } from './api.service';
+import { HomeworksPage } from '../pages/homeworks/homeworks';
 
 export function authServiceFactory(auth: AuthService): Function
 {
@@ -50,7 +51,8 @@ export function authServiceFactory(auth: AuthService): Function
         LogoutPage,
         AwayPage,
         LicensePage,
-        MarksPage
+        MarksPage,
+        HomeworksPage
     ],
     imports: [
         BrowserModule,
@@ -67,7 +69,8 @@ export function authServiceFactory(auth: AuthService): Function
         LogoutPage,
         AwayPage,
         LicensePage,
-        MarksPage
+        MarksPage,
+        HomeworksPage
     ],
     providers: [
         StatusBar,

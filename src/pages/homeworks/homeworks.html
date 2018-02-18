@@ -1,0 +1,43 @@
+<!--
+    Sakado, an app for school
+    Copyright (c) 2017-2018 Adrien 'Litarvan' Navratil
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<ion-header>
+    <ion-navbar color="primary">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Sakado - Devoirs</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-card *ngFor="let homework of homeworks">
+        <ion-item>
+            <h2 [class.long]="homework.long">{{ homework.subject }} <span *ngIf="homework.long">-</span> <span *ngIf="homework.long" class="long-label">LONG</span></h2>
+            <p>Pour <span [class.tomorrow]="isTomorrow(homework.time)">{{ getDate(homework.time) }}</span></p>
+        </ion-item>
+
+        <ion-card-content>
+            <p>{{ homework.content }}</p>
+        </ion-card-content>
+
+        <ion-item>
+            <ion-label>Marquer comme long</ion-label>
+            <ion-checkbox id="long" [checked]="homework.long" (ionChange)="setLong($event, homework)"></ion-checkbox>
+        </ion-item>
+    </ion-card>
+</ion-content>
