@@ -114,9 +114,6 @@ export class AuthService
 
     protected async log(result)
     {
-        this.token = result['token'];
-        this.logged = true;
-
         this.user = (await this.http.get<any>(`${this.server.url}/graphql`, {
             params: {
                 query: `query {
@@ -124,12 +121,23 @@ export class AuthService
                         name
                         studentClass
                         avatar
+                        
+                        admin
+                        representative
                     }
                 }`
             },
             headers: {
-                Token: this.token
+                Token: result['token']
             }
         }).toPromise()).user;
+
+        this.token = result['token'];
+        this.logged = true;
+    }
+
+    isRepresentative()
+    {
+        return this.user.admin || this.user.representative;
     }
 }

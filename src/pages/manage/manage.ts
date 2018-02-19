@@ -15,11 +15,16 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-#logout-icon {
-    font-size: 72px;
-    margin-top: 35px;
-}
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../app/api.service';
 
-#logout-button {
-    margin-top: 20px;
+@Component({
+    selector: 'page-manage',
+    templateUrl: 'manage.html'
+})
+export class ManagePage implements OnInit
+{
+    ngOnInit()
+    {
+    }
 }

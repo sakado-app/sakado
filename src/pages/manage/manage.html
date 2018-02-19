@@ -20,24 +20,10 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Sakado - Devoirs</ion-title>
+        <ion-title>Sakado - Gérer</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-    <ion-card *ngFor="let homework of homeworks">
-        <ion-item>
-            <h2 [class.long]="homework.long">{{ homework.subject }} <span *ngIf="homework.long">-</span> <span *ngIf="homework.long" class="long-label">LONG</span></h2>
-            <p>Pour <span [class.tomorrow]="isTomorrow(homework.time)">{{ getDate(homework.time) }}</span></p>
-        </ion-item>
 
-        <ion-card-content>
-            <p>{{ homework.content }}</p>
-        </ion-card-content>
-
-        <ion-item *ngIf="representative">
-            <ion-label>Marquer comme long</ion-label>
-            <ion-checkbox id="long" [checked]="homework.long" (ionChange)="setLong($event, homework)"></ion-checkbox>
-        </ion-item>
-    </ion-card>
 </ion-content>

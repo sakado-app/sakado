@@ -18,6 +18,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../app/api.service';
 import { date } from '../../app/util';
+import { AuthService } from "../../app/auth.service";
 
 @Component({
     selector: 'page-homeworks',
@@ -26,9 +27,11 @@ import { date } from '../../app/util';
 export class HomeworksPage implements OnInit
 {
     homeworks = [];
+    representative: boolean;
 
-    constructor(private api: ApiService)
+    constructor(private api: ApiService, private auth: AuthService)
     {
+        this.representative = auth.isRepresentative();
     }
 
     ngOnInit()

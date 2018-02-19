@@ -20,7 +20,7 @@ import { ApiService } from '../../app/api.service';
 import { date } from '../../app/util';
 
 @Component({
-    selector: 'page-notes',
+    selector: 'page-manage',
     templateUrl: 'marks.html'
 })
 export class MarksPage implements OnInit
