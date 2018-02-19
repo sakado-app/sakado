@@ -35,16 +35,22 @@ export class HomeworksPage implements OnInit
     {
         this.api.userQuery(`{
             homeworks {
+                id
                 subject
                 content
                 time
+                long
             }
         }`).then(result => this.homeworks = result.homeworks);
     }
 
-    setLong(event, homework)
+    async setLong(event, homework)
     {
-        homework.long = event.checked;
+        homework.long = (await this.api.userMutation(`{
+            homework(id: "${homework.id}") {
+                long(long: ${event.checked})
+            }
+        }`)).homework.long;
     }
 
     isTomorrow(time: number): boolean

@@ -92,6 +92,7 @@ export class AuthService
         }
         catch (err)
         {
+            console.error(err);
             this.error = 'Impossible de contacter le serveur Sakado, une maintenance est probablement en cours';
         }
 
@@ -119,12 +120,15 @@ export class AuthService
         this.user = (await this.http.get<any>(`${this.server.url}/graphql`, {
             params: {
                 query: `query {
-                    user(token: "${this.token}") {
+                    user {
                         name
                         studentClass
                         avatar
                     }
                 }`
+            },
+            headers: {
+                Token: this.token
             }
         }).toPromise()).user;
     }

@@ -15,7 +15,16 @@ export class ApiService
     {
         return (await this.query(`
             query {
-                user(token: "${this.auth.token}") ${query}
+                user ${query}
+            }
+        `)).user;
+    }
+
+    async userMutation(query: string): Promise<any>
+    {
+        return (await this.query(`
+            mutation {
+                user ${query}
             }
         `)).user;
     }
@@ -25,6 +34,9 @@ export class ApiService
         return this.http.get<any>(`${this.server.url}/graphql`, {
             params: {
                 query: query
+            },
+            headers: {
+                Token: this.auth.token
             }
         }).toPromise();
     }
