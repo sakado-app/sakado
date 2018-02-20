@@ -35,8 +35,8 @@ export class LoginPage implements OnInit, AfterViewInit
     password;
 
     logging = false;
-    links = [];
-    selectedLink = 'loading';
+    establishments = [];
+    selectedEstablishment = 'loading';
 
     loginForm = new FormGroup({
         username: new FormControl('', [
@@ -67,20 +67,17 @@ export class LoginPage implements OnInit, AfterViewInit
     {
         try
         {
-            this.links = (await this.api.query(`
+            this.establishments = (await this.api.query(`
                 query {
-                    links {
-                        name
-                        link
-                    }
+                    establishments
                 }
-            `)).links || [];
+            `)).establishments || [];
         }
         catch (e)
         {
         }
 
-        this.selectedLink = localStorage.getItem('sakado.link') || 'loading';
+        this.selectedEstablishment = localStorage.getItem('sakado.establishment') || 'loading';
     }
 
     login()
@@ -94,11 +91,11 @@ export class LoginPage implements OnInit, AfterViewInit
         const username = this.loginForm.get('username').value;
         const password = this.loginForm.get('password').value;
 
-        localStorage.setItem('sakado.link', this.selectedLink);
+        localStorage.setItem('sakado.establishment', this.selectedEstablishment);
         localStorage.setItem('sakado.username', username);
 
         (async () => {
-            let result = await this.auth.login(username, password, this.selectedLink);
+            let result = await this.auth.login(username, password, this.selectedEstablishment);
 
             if (result == false)
             {

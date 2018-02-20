@@ -34,13 +34,13 @@ export class AuthService
     {
     }
 
-    async login(username: string, password: string, link: string): Promise<boolean>
+    async login(username: string, password: string, establishment: string): Promise<boolean>
     {
         let result = await this.http.get(`${this.server.url}/auth/login`, {
             params: {
                 username: username,
                 password: password,
-                link: link,
+                establishment: establishment,
                 deviceToken: this.deviceToken
             }
         }).toPromise();
