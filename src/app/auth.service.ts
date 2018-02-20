@@ -124,6 +124,8 @@ export class AuthService
                         
                         admin
                         representative
+                        
+                        homeworksEnabled
                     }
                 }`
             },

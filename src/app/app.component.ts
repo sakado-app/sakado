@@ -41,8 +41,7 @@ export class SakadoApp implements OnInit
     @ViewChild(Nav) nav: Nav;
 
     rootPage: any;
-
-    pages: Array<{ title: string, component: any, auth?: boolean, admin?: boolean }>;
+    pages: Array<{ title: string, component: any, auth?: boolean, homeworks?: boolean, admin?: boolean }>;
 
     constructor(private platform: Platform, private statusBar: StatusBar, private splashScreen: SplashScreen, private push: Push, private alertCtrl: AlertController, public auth: AuthService, private server: ServerService)
     {
@@ -55,7 +54,7 @@ export class SakadoApp implements OnInit
             { title: 'Prochain cours', component: NextPage, auth: true },
             { title: 'Profs absents', component: AwayPage, auth: true },
             { title: 'Notes', component: MarksPage, auth: true },
-            { title: 'Devoirs', component: HomeworksPage, auth: true },
+            { title: 'Devoirs', component: HomeworksPage, auth: true, homeworks: true },
             { title: 'Gérer', component: ManagePage, auth: true, admin: true },
             { title: 'Se deconnecter', component: LogoutPage, auth: true },
             { title: 'A Propos', component: AboutPage }
@@ -200,20 +199,5 @@ export class SakadoApp implements OnInit
         {
             this.nav.setRoot(MarksPage);
         }
-    }
-
-    shouldBeDisplayed(page)
-    {
-        if (page.auth !== undefined && page.auth !== this.auth.logged)
-        {
-            return false;
-        }
-
-        if (this.auth.logged && page.admin && !this.auth.user.admin)
-        {
-            return false;
-        }
-
-        return true;
     }
 }
