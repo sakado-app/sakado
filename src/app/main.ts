@@ -20,7 +20,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app.module';
 import { enableProdMode } from '@angular/core';
 
-export const VERSION = 'Alpha 0.2.0';
+export const VERSION = 'Beta 1.0.0';
 export const PROXY_URL = 'http://salondesdevs.io:15774';
 export const DEBUG = true;
 
