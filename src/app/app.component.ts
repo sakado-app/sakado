@@ -63,9 +63,10 @@ export class SakadoApp implements OnInit
 
     ngOnInit()
     {
-        let serverVersion = this.server.version;
+        let clientVersion = VERSION.substring(VERSION.indexOf(' ') + 1);
+        let serverVersion = this.server.version.substring(0, this.server.version.indexOf('-'));
 
-        let currentSplit = VERSION.split('.');
+        let currentSplit = clientVersion.split('.');
         let serverSplit = serverVersion.split('.');
 
         let error = null;
@@ -78,7 +79,7 @@ export class SakadoApp implements OnInit
                 fatal: true
             };
         }
-        else if (parseInt(currentSplit[1]) < parseInt(serverSplit[1]) || !serverVersion.endsWith('BETA'))
+        else if (parseInt(currentSplit[0]) < parseInt(serverSplit[0]) || parseInt(currentSplit[1]) < parseInt(serverSplit[1]) || !this.server.version.endsWith('BETA'))
         {
             error = {
                 title: 'Nouvelle version',
@@ -86,7 +87,7 @@ export class SakadoApp implements OnInit
                 fatal: true
             };
         }
-        else if (currentSplit[2] !== serverSplit[2])
+        else if (parseInt(currentSplit[2]) < parseInt(serverSplit[2]))
         {
             error = {
                 title: 'Nouvelle version',
