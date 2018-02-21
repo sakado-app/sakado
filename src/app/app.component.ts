@@ -193,14 +193,24 @@ export class SakadoApp implements OnInit
             return;
         }
 
-        if (data.type.toLowerCase() === 'away')
+        let page;
+
+        switch (data.type.toLowerCase())
         {
-            this.nav.setRoot(AwayPage);
+            case 'away':
+                page = AwayPage;
+                break;
+            case 'mark':
+                page = MarksPage;
+                break;
+            case 'homework':
+                page = HomeworksPage;
+                break;
         }
 
-        if (data.type.toLowerCase() === 'mark')
+        if (page !== undefined)
         {
-            this.nav.setRoot(MarksPage);
+            this.nav.setRoot(page);
         }
     }
 }
