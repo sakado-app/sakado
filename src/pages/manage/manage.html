@@ -25,5 +25,15 @@
 </ion-header>
 
 <ion-content>
-
+    <!-- <h2>Délégués</h2> -->
+    <ion-list>
+        <ion-item-group>
+            <ion-item-divider color="light">Délégués</ion-item-divider>
+            <ion-item *ngFor="let representative of representatives">
+                {{ representative }}
+                <button ion-button clear item-end (click)="removeRepresentative(representative)">Supprimer</button>
+            </ion-item>
+            <button ion-item (click)="addRepresentative()">Ajouter</button>
+        </ion-item-group>
+    </ion-list>
 </ion-content>

@@ -17,6 +17,7 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../app/api.service';
+import { AlertController } from "ionic-angular";
 
 @Component({
     selector: 'page-manage',
@@ -24,7 +25,59 @@ import { ApiService } from '../../app/api.service';
 })
 export class ManagePage implements OnInit
 {
+    representatives = [];
+
+    constructor(private api: ApiService, private alertCtrl: AlertController)
+    {
+    }
+
     ngOnInit()
     {
+        this.api.userQuery(`{
+            class {
+                representatives
+            }
+        }`).then(result => this.representatives = result.class.representatives);
+    }
+
+    addRepresentative()
+    {
+        let prompt = this.alertCtrl.create({
+            title: 'Ajouter un délégué',
+            message: "Entrez l'IDENTIFIANT du délégué à ajouter (ex: 'adrien.navratil')",
+            inputs: [
+                {
+                    name: 'username',
+                    placeholder: "Nom d'utilisateur"
+                },
+            ],
+            buttons: [
+                {
+                    text: 'Annuler'
+                },
+                {
+                    text: 'Ajouter',
+                    handler: data => {
+                        this.api.userMutation(`{
+                            class {
+                                addRepresentative(username: "${data.username}")
+                            }
+                        }`).then(result => {
+                            this.representatives.push(result.class.addRepresentative);
+                        })
+                    }
+                }
+            ]
+        });
+        prompt.present();
+    }
+
+    removeRepresentative(representative: string)
+    {
+        this.api.userMutation(`{
+            class {
+                removeRepresentative(username: "${representative}")
+            }
+        }`).then(result => this.representatives.splice(this.representatives.indexOf(result.class.removeRepresentative), 1))
     }
 }

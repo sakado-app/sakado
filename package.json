@@ -3,7 +3,7 @@
     "version": "1.0.0-BETA",
     "author": "Adrien 'Litarvan' Navratil <adrien1975@live.fr>",
     "homepage": "https://github.com/Litarvan",
-    "private": true,
+    "license": "GPL-3.0",
     "scripts": {
         "clean": "ionic-app-scripts clean",
         "build": "ionic-app-scripts build",
@@ -43,7 +43,7 @@
         "@ionic/app-scripts": "3.1.6",
         "typescript": "2.4.2"
     },
-    "description": "An Ionic project",
+    "description": "The Sakado school application",
     "cordova": {
         "plugins": {
             "ionic-plugin-keyboard": {},
