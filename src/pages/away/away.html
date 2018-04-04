@@ -30,7 +30,7 @@
             <div class="week-name">{{ weekDate(week) }}</div>
             <ion-card *ngFor="let lesson of week.content">
                 <ion-card-header id="away-title">{{ lesson.teacher }} - <span class="away">ABSENT</span></ion-card-header>
-                <ion-card-content>{{ coursDate(lesson) }} <b>/</b> <i>{{ lesson.name }}</i></ion-card-content>
+                <ion-card-content>{{ coursDate(lesson) }} <b>/</b> <i>{{ lesson.subject }}</i></ion-card-content>
             </ion-card>
         </div>
     </div>

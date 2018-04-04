@@ -41,10 +41,11 @@ export class HomeworksPage implements OnInit
                 id
                 subject
                 content
-                time
+                since
+                until
                 long
             }
-        }`).then(result => this.homeworks = result.homeworks);
+        }`).then(result => this.homeworks = result.homeworks.filter(h => !this.isPassed(h.until)));
     }
 
     async setLong(event, homework)
@@ -54,6 +55,16 @@ export class HomeworksPage implements OnInit
                 long(long: ${event.checked})
             }
         }`)).homework.long;
+    }
+
+    isPassed(time: number): boolean
+    {
+        return new Date(time).getDay() < new Date().getDay();
+    }
+
+    isToday(time: number): boolean
+    {
+        return new Date(time).getDay() == new Date().getDay();
     }
 
     isTomorrow(time: number): boolean
@@ -70,7 +81,12 @@ export class HomeworksPage implements OnInit
             return 'demain';
         }
 
-        return date(d, false, true, false);
+        if (this.isToday(time))
+        {
+            return 'aujourd\'hui';
+        }
+
+        return 'le ' + date(d, false, true, false);
     }
 
 }

@@ -17,7 +17,7 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../app/api.service';
-import { date } from '../../app/util';
+import { date, rangeHour } from '../../app/util';
 
 @Component({
     selector: 'page-away',
@@ -35,14 +35,14 @@ export class AwayPage implements OnInit
     {
         this.api.userQuery(`{
             away {
-                from
-                to
+                time
                 
                 content {
-                    name
+                    subject
                     teacher
                     
                     from
+                    to
                 }
             }
         }`).then(result => this.away = result.away);
@@ -50,11 +50,15 @@ export class AwayPage implements OnInit
 
     coursDate(lesson)
     {
-        return date(new Date(lesson.from), true);
+        return date(new Date(lesson.from), false) + ' ' + rangeHour(new Date(lesson.from), new Date(lesson.to));
     }
 
     weekDate(week)
     {
-        return date(new Date(week.from), false, false, true) + ' - ' + date(new Date(week.to), false, true);
+        let from = new Date(week.time);
+        let to = new Date(week.time);
+        to.setDate(to.getDate() + 5);
+
+        return date(from, false, false) + ' - ' + date(to, false, false, true);
     }
 }

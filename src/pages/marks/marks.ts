@@ -37,7 +37,8 @@ export class MarksPage implements OnInit
         this.api.userQuery(`{
             lastMarks {
                 subject
-                mark
+                value
+                max
                 time
             }
             

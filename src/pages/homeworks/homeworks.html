@@ -28,7 +28,7 @@
     <ion-card *ngFor="let homework of homeworks">
         <ion-item>
             <h2 [class.long]="homework.long">{{ homework.subject }} <span *ngIf="homework.long">-</span> <span *ngIf="homework.long" class="long-label">LONG</span></h2>
-            <p>Pour <span [class.tomorrow]="isTomorrow(homework.time)">{{ getDate(homework.time) }}</span></p>
+            <p>Pour <span [class.tomorrow]="isToday(homework.until) || isTomorrow(homework.until)">{{ getDate(homework.until) }}</span> (donné le {{ getDate(homework.since) }})</p>
         </ion-item>
 
         <ion-card-content>

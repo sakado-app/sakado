@@ -22,7 +22,7 @@ import { enableProdMode } from '@angular/core';
 
 export const VERSION = 'Beta 1.0.0';
 export const PROXY_URL = 'http://salondesdevs.io:15774';
-export const DEBUG = false;
+export const DEBUG = true;
 
 if (!DEBUG)
 {

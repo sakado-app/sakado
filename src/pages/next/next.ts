@@ -17,7 +17,7 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../app/api.service';
-import { date } from '../../app/util';
+import { date, rangeHour } from '../../app/util';
 
 @Component({
     selector: 'page-next',
@@ -35,7 +35,7 @@ export class NextPage implements OnInit
     {
         this.api.userQuery(`{
             nextLesson {
-                name
+                subject
                 teacher
                 room
                 
@@ -50,6 +50,6 @@ export class NextPage implements OnInit
         let from = new Date(this.next.from);
         let to = new Date(this.next.to);
 
-        return date(from) + ' ' + from.getHours() + 'h-' + to.getHours() + 'h';
+        return date(from) + ' ' + rangeHour(from, to);
     }
 }
