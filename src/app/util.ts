@@ -11,7 +11,7 @@ export function date(date: Date, hour: boolean = false, weekday: boolean = true,
 
 export function rangeHour(from: Date, to: Date)
 {
-    return 'de ' + parseHour(from) + 'h à ' + parseHour(to);
+    return 'de ' + parseHour(from) + ' à ' + parseHour(to);
 }
 
 export function parseHour(date: Date)
