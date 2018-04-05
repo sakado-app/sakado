@@ -36,22 +36,25 @@
         <ion-item class="moyenne">
             Classe <ion-badge item-end>{{ averages.studentClass }}</ion-badge>
         </ion-item>
+        <button ion-item (click)="openAverages()">
+            Par matières <ion-icon item-end name="arrow-forward"></ion-icon>
+        </button>
     </ion-card>
 
     <h3 id="last-notes">Dernières notes</h3>
 
     <div id="notes-content" *ngFor="let mark of marks">
         <ion-card>
-            <ion-item id="note-title">
+            <ion-item class="note-title">
                 <h2>{{ mark.subject }}</h2>
             </ion-item>
 
             <ion-item>
                 <ion-row>
-                    <ion-col id="note-date">
+                    <ion-col>
                         <p>{{ getDate(mark) }}</p>
                     </ion-col>
-                    <ion-col id="note-value">
+                    <ion-col>
                         {{ mark.value }} / {{ mark.max }}
                     </ion-col>
                 </ion-row>

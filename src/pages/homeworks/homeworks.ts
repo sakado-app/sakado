@@ -72,16 +72,16 @@ export class HomeworksPage implements OnInit
         return new Date(time).getDay() - 1 == new Date().getDay();
     }
 
-    getDate(time: number)
+    getDate(time: number, special: boolean = true)
     {
         let d = new Date(time);
 
-        if (this.isTomorrow(time))
+        if (this.isTomorrow(time) && special)
         {
             return 'demain';
         }
 
-        if (this.isToday(time))
+        if (this.isToday(time) && special)
         {
             return 'aujourd\'hui';
         }

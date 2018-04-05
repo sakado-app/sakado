@@ -19,44 +19,49 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../app/api.service';
 import { date } from '../../app/util';
 import { NavController } from 'ionic-angular';
-import { MarksDetailsPage } from '../marks-details/marks-details';
 
 @Component({
-    selector: 'page-marks',
-    templateUrl: 'marks.html'
+    selector: 'page-marks-details',
+    templateUrl: 'marks-details.html'
 })
-export class MarksPage implements OnInit
+export class MarksDetailsPage implements OnInit
 {
     marks = [];
-    averages = {};
 
-    constructor(private api: ApiService, private nav: NavController)
+    constructor(private api: ApiService)
     {
     }
 
     ngOnInit()
     {
         this.api.userQuery(`{
-            lastMarks {
+            marks {
                 subject
-                value
-                max
-                time
+                marks {
+                    title
+                    value
+                    max
+                    time
+                }
             }
             
             averages {
-                student
-                studentClass
+                subjects {
+                    subject
+                    value
+                }
             }
         }`).then(result => {
-            this.marks = result.lastMarks;
-            this.averages = result.averages;
+            this.marks = result.marks;
+            result.averages.subjects.forEach(average => {
+                this.marks.forEach(marks => {
+                    if (marks.subject === average.subject)
+                    {
+                        marks.average = average.value;
+                    }
+                })
+            });
         });
-    }
-
-    openAverages()
-    {
-        this.nav.push(MarksDetailsPage);
     }
 
     getDate(mark)

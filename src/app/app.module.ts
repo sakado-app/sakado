@@ -37,6 +37,7 @@ import { MarksPage } from '../pages/marks/marks';
 import { ApiService } from './api.service';
 import { HomeworksPage } from '../pages/homeworks/homeworks';
 import { ManagePage } from "../pages/manage/manage";
+import { MarksDetailsPage } from '../pages/marks-details/marks-details';
 
 export function authServiceFactory(auth: AuthService): Function
 {
@@ -53,6 +54,7 @@ export function authServiceFactory(auth: AuthService): Function
         AwayPage,
         LicensePage,
         MarksPage,
+        MarksDetailsPage,
         HomeworksPage,
         ManagePage
     ],
@@ -72,6 +74,7 @@ export function authServiceFactory(auth: AuthService): Function
         AwayPage,
         LicensePage,
         MarksPage,
+        MarksDetailsPage,
         HomeworksPage,
         ManagePage
     ],

@@ -17,7 +17,7 @@
  */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DEBUG, PROXY_URL } from './main';
+import { DEBUG, SERVER_URL } from './main';
 
 @Injectable()
 export class ServerService
@@ -31,15 +31,15 @@ export class ServerService
 
     async load()
     {
+        await this.http.get(`https://jsonplaceholder.typicode.com/posts/1`).toPromise(); // Internet checking !
+
         if (DEBUG)
         {
             this.url = 'http://127.0.0.1:17334/'
         }
         else
         {
-            this.url = "http://" + await this.http.get(`${PROXY_URL}/get`, {
-                responseType: 'text'
-            }).toPromise() + ":17334";
+            this.url = SERVER_URL;
         }
 
         try
