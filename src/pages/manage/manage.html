@@ -25,10 +25,19 @@
 </ion-header>
 
 <ion-content>
-    <!-- <h2>Délégués</h2> -->
+    <h2>Notifier la classe</h2>
+    <ion-item id="notif-item">
+        <ion-textarea #area id="global-notif">
+
+        </ion-textarea>
+    </ion-item>
+
+    <button ion-button id="send-notif" [disabled]="area.value === ''" (click)="send(area.value); area.value = ''">Envoyer</button>
+
+    <h2>Délégués</h2>
     <ion-list>
         <ion-item-group>
-            <ion-item-divider color="light">Délégués</ion-item-divider>
+            <!-- <ion-item-divider color="light">Délégués</ion-item-divider> -->
             <ion-item *ngFor="let representative of representatives">
                 {{ representative }}
                 <button ion-button clear item-end (click)="removeRepresentative(representative)">Supprimer</button>

@@ -32,6 +32,7 @@ import { VERSION } from './main';
 import { ServerService } from './server.service';
 import { HomeworksPage } from '../pages/homeworks/homeworks';
 import { ManagePage } from "../pages/manage/manage";
+import { RemindersPage } from '../pages/reminders/reminders';
 
 @Component({
     templateUrl: 'app.html'
@@ -55,6 +56,7 @@ export class SakadoApp implements OnInit
             { title: 'Profs absents', component: AwayPage, auth: true },
             { title: 'Notes', component: MarksPage, auth: true },
             { title: 'Devoirs', component: HomeworksPage, auth: true, homeworks: true },
+            { title: 'Rappels', component: RemindersPage, auth: true },
             { title: 'Gérer', component: ManagePage, auth: true, admin: true },
             { title: 'Se deconnecter', component: LogoutPage, auth: true },
             { title: 'A Propos', component: AboutPage }
@@ -206,11 +208,14 @@ export class SakadoApp implements OnInit
             case 'homework':
                 page = HomeworksPage;
                 break;
+            case 'reminder':
+                page = RemindersPage;
+                break;
         }
 
         if (page !== undefined)
         {
-            this.nav.setRoot(page);
+            this.openPage(page);
         }
     }
 }

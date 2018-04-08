@@ -19,6 +19,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../app/api.service';
 import { date } from '../../app/util';
 import { NavController } from 'ionic-angular';
+import { MarkDetailPage } from '../mark-detail/mark-detail';
 
 @Component({
     selector: 'page-marks-details',
@@ -28,7 +29,7 @@ export class MarksDetailsPage implements OnInit
 {
     marks = [];
 
-    constructor(private api: ApiService)
+    constructor(private api: ApiService, private nav: NavController)
     {
     }
 
@@ -41,6 +42,10 @@ export class MarksDetailsPage implements OnInit
                     title
                     value
                     max
+                    average
+                    higher
+                    lower
+                    coefficient
                     time
                 }
             }
@@ -61,6 +66,14 @@ export class MarksDetailsPage implements OnInit
                     }
                 })
             });
+        });
+    }
+
+    openMark(subject, mark)
+    {
+        this.nav.push(MarkDetailPage, {
+            subject,
+            mark
         });
     }
 

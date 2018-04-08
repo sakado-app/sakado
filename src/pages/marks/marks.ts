@@ -20,6 +20,7 @@ import { ApiService } from '../../app/api.service';
 import { date } from '../../app/util';
 import { NavController } from 'ionic-angular';
 import { MarksDetailsPage } from '../marks-details/marks-details';
+import { MarkDetailPage } from '../mark-detail/mark-detail';
 
 @Component({
     selector: 'page-marks',
@@ -39,8 +40,13 @@ export class MarksPage implements OnInit
         this.api.userQuery(`{
             lastMarks {
                 subject
+                title
                 value
                 max
+                average
+                higher
+                lower
+                coefficient
                 time
             }
             

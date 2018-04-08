@@ -20,26 +20,26 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Sakado - Profs. absents</ion-title>
+        <ion-title>Sakado - Ajouter un rappel</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-    <div id="away-content" *ngIf="away !== null">
-        <div *ngFor="let week of away">
-            <div class="week-name">{{ weekDate(week) }}</div>
-            <ion-card *ngFor="let lesson of week.content">
-                <ion-card-header id="away-title">
-                    {{ lesson.teacher }}
-                    -
-                    <span [class.away]="lesson.away" [class.cancelled]="lesson.cancelled">
-                        {{ lesson.away ? 'ABSENT' : 'ANNULÉ' }}
-                    </span>
+    <h1>Ajouter un rappel pour {{ global ? 'la classe' : 'soi-même' }}</h1>
+    <form [formGroup]="reminderForm" (ngSubmit)="add()" id="reminder-form" novalidate>
+        <ion-item>
+            <ion-label floating>Titre du rappel</ion-label>
+            <ion-input id="title" [readonly]="adding" formControlName="title"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Contenu du rappel</ion-label>
+            <ion-textarea id="content" [readonly]="adding" formControlName="content"></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Date du rappel</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" max="2019-07-05" formControlName="time"></ion-datetime>
+        </ion-item>
 
-                    <ion-icon *ngIf="lesson.cancelled" class="cancelled-help" name="help-circle" (click)="displayHelp()"></ion-icon>
-                </ion-card-header>
-                <ion-card-content>{{ coursDate(lesson) }} <b>/</b> <i>{{ lesson.subject }}</i></ion-card-content>
-            </ion-card>
-        </div>
-    </div>
+        <button ion-button [disabled]="reminderForm.invalid || adding" id="add">Ajouter</button>
+    </form>
 </ion-content>

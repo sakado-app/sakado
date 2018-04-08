@@ -16,19 +16,18 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-:host {
-    text-align: left;
+.reminder-group {
+    margin-top: 15px;
+    margin-bottom: 11px;
 }
 
-#notif-item {
-    padding-right: 15px;
+.reminder-add {
+    margin-top: 4px;
+    margin-bottom: 10px;
 }
 
-#send-notif {
-    margin-top: 20px;
-    margin-bottom: 15px;
-}
-
-#global-notif textarea {
-    height: 50px;
+.reminder-author {
+    color: #727272;
+    font-style: italic;
+    font-size: 15px;
 }

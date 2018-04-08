@@ -23,6 +23,10 @@
     color: red;
 }
 
+.cancelled {
+    color: orange;
+}
+
 .week-name {
     color: #333;
     padding: 15px 5px 5px 15px;
@@ -30,4 +34,15 @@
 
 #away-title {
     font-size: 1.9rem;
+}
+
+
+.cancelled-help {
+    color: #9c9c9c;
+    font-size: 20px;
+    margin-left: 2px;
+}
+
+.cancelled-help:hover {
+    color: #777;
 }

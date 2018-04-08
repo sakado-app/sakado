@@ -16,19 +16,23 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-:host {
-    text-align: left;
+.reminder-date .item-inner .input-wrapper ion-label {
+    margin-top: 2px;
 }
 
-#notif-item {
-    padding-right: 15px;
+.tomorrow {
+    font-weight: bold !important;
 }
 
-#send-notif {
-    margin-top: 20px;
-    margin-bottom: 15px;
+.reminder-date > div:nth-child(1) > div:nth-child(1) > ion-label:nth-child(1) {
+    margin-bottom: 0;
 }
 
-#global-notif textarea {
-    height: 50px;
+.reminder-author > div:nth-child(1) > div:nth-child(1) > ion-label:nth-child(1) {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.reminder-delete {
+    color: #f53d3d;
 }

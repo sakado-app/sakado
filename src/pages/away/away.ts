@@ -18,6 +18,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../app/api.service';
 import { date, rangeHour } from '../../app/util';
+import { ToastController } from 'ionic-angular';
 
 @Component({
     selector: 'page-away',
@@ -27,7 +28,7 @@ export class AwayPage implements OnInit
 {
     away = null;
 
-    constructor(private api: ApiService)
+    constructor(private api: ApiService, private toast: ToastController)
     {
     }
 
@@ -40,6 +41,9 @@ export class AwayPage implements OnInit
                 content {
                     subject
                     teacher
+                    
+                    away
+                    cancelled
                     
                     from
                     to
@@ -60,5 +64,13 @@ export class AwayPage implements OnInit
         to.setDate(to.getDate() + 5);
 
         return date(from, false, false) + ' - ' + date(to, false, false, true);
+    }
+
+    displayHelp()
+    {
+        this.toast.create({
+            message: 'Signifie souvent un examen, une sortie scolaire ou un cours déplacé',
+            duration: 4000
+        }).present();
     }
 }

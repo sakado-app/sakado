@@ -22,7 +22,7 @@ import { enableProdMode } from '@angular/core';
 
 export const VERSION = 'Beta 1.1.0';
 export const SERVER_URL = 'http://91.134.149.67:17334/';
-export const DEBUG = false;
+export const DEBUG = true;
 
 if (!DEBUG)
 {

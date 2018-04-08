@@ -32,12 +32,12 @@
             </ion-item>
 
             <ion-item>
-                <ion-row *ngFor="let mark of subject.marks">
+                <ion-row *ngFor="let mark of subject.marks" (click)="openMark(subject.subject, mark)">
                     <ion-col>
                         <p>{{ getDate(mark) }}</p>
                     </ion-col>
                     <ion-col>
-                        {{ mark.value }} / {{ mark.max }}
+                        <span class="mark-value">{{ mark.value }}</span>/{{ mark.max }}
                     </ion-col>
                 </ion-row>
             </ion-item>

@@ -33,11 +33,11 @@
   <form [formGroup]="loginForm" (ngSubmit)="login()" id="login-form" novalidate>
     <ion-item>
       <ion-label floating>Nom d'utilisateur</ion-label>
-      <ion-input #username id="username" [readonly]="logging" formControlName="username"></ion-input>
+      <ion-input id="username" [readonly]="logging" formControlName="username"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Mot de passe</ion-label>
-      <ion-input #password id="password" type="password" [readonly]="logging" [clearOnEdit]="!logging" formControlName="password"></ion-input>
+      <ion-input id="password" type="password" [readonly]="logging" [clearOnEdit]="!logging" formControlName="password"></ion-input>
     </ion-item>
     <ion-item class="establishment-item">
       <ion-label floating>Etablissement</ion-label>

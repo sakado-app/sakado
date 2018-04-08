@@ -20,26 +20,20 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Sakado - Profs. absents</ion-title>
+        <ion-title>Sakado - Rappels</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-    <div id="away-content" *ngIf="away !== null">
-        <div *ngFor="let week of away">
-            <div class="week-name">{{ weekDate(week) }}</div>
-            <ion-card *ngFor="let lesson of week.content">
-                <ion-card-header id="away-title">
-                    {{ lesson.teacher }}
-                    -
-                    <span [class.away]="lesson.away" [class.cancelled]="lesson.cancelled">
-                        {{ lesson.away ? 'ABSENT' : 'ANNULÉ' }}
-                    </span>
+    <h3 class="reminder-group">Rappels de la classe</h3>
+    <reminder *ngFor="let reminder of studentClass" [reminder]="reminder" [global]="true" [proposeDelete]="true">
+    </reminder>
 
-                    <ion-icon *ngIf="lesson.cancelled" class="cancelled-help" name="help-circle" (click)="displayHelp()"></ion-icon>
-                </ion-card-header>
-                <ion-card-content>{{ coursDate(lesson) }} <b>/</b> <i>{{ lesson.subject }}</i></ion-card-content>
-            </ion-card>
-        </div>
-    </div>
+    <button ion-button class="reminder-add" (click)="add(true)">Ajouter un rappel pour la classe</button>
+
+    <h3 class="reminder-group">Mes rappels persos</h3>
+    <reminder *ngFor="let reminder of user" [reminder]="reminder" [global]="false" [proposeDelete]="true">
+    </reminder>
+
+    <button ion-button class="reminder-add" (click)="add(false)">Ajouter un rappel perso</button>
 </ion-content>

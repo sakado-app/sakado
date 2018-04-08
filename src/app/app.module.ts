@@ -38,6 +38,10 @@ import { ApiService } from './api.service';
 import { HomeworksPage } from '../pages/homeworks/homeworks';
 import { ManagePage } from "../pages/manage/manage";
 import { MarksDetailsPage } from '../pages/marks-details/marks-details';
+import { RemindersPage } from '../pages/reminders/reminders';
+import { ReminderComponent } from '../components/reminder/reminder';
+import { MarkDetailPage } from '../pages/mark-detail/mark-detail';
+import { AddReminderPage } from '../pages/add-reminder/add-reminder';
 
 export function authServiceFactory(auth: AuthService): Function
 {
@@ -56,7 +60,12 @@ export function authServiceFactory(auth: AuthService): Function
         MarksPage,
         MarksDetailsPage,
         HomeworksPage,
-        ManagePage
+        ManagePage,
+        RemindersPage,
+        MarkDetailPage,
+        AddReminderPage,
+
+        ReminderComponent
     ],
     imports: [
         BrowserModule,
@@ -76,7 +85,12 @@ export function authServiceFactory(auth: AuthService): Function
         MarksPage,
         MarksDetailsPage,
         HomeworksPage,
-        ManagePage
+        ManagePage,
+        RemindersPage,
+        MarkDetailPage,
+        AddReminderPage,
+
+        ReminderComponent
     ],
     providers: [
         StatusBar,

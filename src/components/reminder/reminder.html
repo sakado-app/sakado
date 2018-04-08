@@ -1,0 +1,18 @@
+<ion-card>
+    <ion-card-header class="reminder-title">
+        {{ reminder.title }}
+    </ion-card-header>
+
+    <ion-card-content>
+        {{ reminder.content }}
+    </ion-card-content>
+
+    <ion-item class="reminder-date">
+        Pour <span [class.tomorrow]="isToday(reminder.time) || isTomorrow(reminder.time)">{{ parseDate(reminder.time) }}</span>
+    </ion-item>
+
+    <ion-item class="reminder-author" *ngIf="global">
+        Ajouté par {{ reminder.author }}
+        <ion-icon *ngIf="(auth.user.representative || auth.user.admin) && proposeDelete" class="reminder-delete" item-end name="close" (click)="remove()"></ion-icon>
+    </ion-item>
+</ion-card>

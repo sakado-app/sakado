@@ -28,12 +28,6 @@ import { ApiService } from '../../app/api.service';
 })
 export class LoginPage implements OnInit, AfterViewInit
 {
-    @ViewChildren('username')
-    username;
-
-    @ViewChildren('password')
-    password;
-
     logging = false;
     establishments = [];
     selectedEstablishment = 'loading';

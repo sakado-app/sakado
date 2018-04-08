@@ -88,5 +88,4 @@ export class HomeworksPage implements OnInit
 
         return 'le ' + date(d, false, true, false);
     }
-
 }

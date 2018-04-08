@@ -17,7 +17,7 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../app/api.service';
-import { AlertController } from "ionic-angular";
+import { AlertController, LoadingController } from 'ionic-angular';
 
 @Component({
     selector: 'page-manage',
@@ -27,8 +27,55 @@ export class ManagePage implements OnInit
 {
     representatives = [];
 
-    constructor(private api: ApiService, private alertCtrl: AlertController)
+    constructor(private api: ApiService, private alertCtrl: AlertController, private loading: LoadingController)
     {
+    }
+
+    async send(content)
+    {
+        content = content.replace(/\n/g, ' ');
+
+        let cancel = await new Promise(accept => this.alertCtrl.create({
+            title: 'Envoyer la notification ?',
+            message: `Voulez vous envoyer '${content}' à TOUTE la classe ?`,
+            buttons: [
+                {
+                    text: 'Oui, envoyer',
+                    handler: () => accept(false)
+                },
+                {
+                    text: 'Non, annuler',
+                    handler: () => accept(true)
+                }
+            ]
+        }).present());
+
+        if (cancel)
+        {
+            return;
+        }
+
+        let loading = this.loading.create({
+            content: 'Envoi en cours...'
+        });
+
+        await loading.present();
+        await this.api.userMutation(`{
+            class {
+                notify(content: "${content}")
+            }
+        }`);
+        await loading.dismiss();
+
+        this.alertCtrl.create({
+            title: 'Terminé',
+            message: 'Envoi terminé !',
+            buttons: [
+                {
+                    text: 'Ok'
+                }
+            ]
+        }).present();
     }
 
     ngOnInit()
