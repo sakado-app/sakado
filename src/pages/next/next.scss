@@ -1,0 +1,63 @@
+/*
+ *  Sakado, an app for school
+ *  Copyright (c) 2017-2018 Adrien 'Litarvan' Navratil
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+.lesson-card {
+    margin-left: 15px;
+    margin-bottom: 15px;
+    width: calc(100% - 30px);
+}
+
+.translucent {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(10, 10, 10, 0.4);
+    font-style: italic;
+}
+
+.translucent ion-card-header {
+    color: rgba(10, 10, 10, 0.4);
+}
+
+.away-label {
+    color: rgba(255, 0, 0, 0.5);
+}
+
+.cancelled-label {
+    color: rgba(255, 165, 0, 0.5);
+}
+
+.away-lesson.translucent {
+    border-left: solid rgba(255, 0, 0, 0.4) 3px;
+}
+
+.cancelled-lesson.translucent {
+    border-left: solid rgba(255, 165, 0, 0.4) 3px;
+}
+
+.away-lesson:not(.translucent) {
+    border-left: solid red 4px;
+}
+
+.cancelled-lesson:not(.translucent) {
+    border-left: solid orange 4px;
+}
+
+.lesson:not(.translucent):not(.away-lesson):not(.cancelled-lesson) {
+    /*margin-left: 20px;
+    width: calc(100% - 30px);*/
+    border-left: solid #64dd17 5px;
+}

@@ -17,8 +17,6 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../app/api.service';
-import { date } from '../../app/util';
-import { AuthService } from "../../app/auth.service";
 
 @Component({
     selector: 'page-homeworks',
@@ -27,11 +25,9 @@ import { AuthService } from "../../app/auth.service";
 export class HomeworksPage implements OnInit
 {
     homeworks = [];
-    representative: boolean;
 
-    constructor(private api: ApiService, private auth: AuthService)
+    constructor(private api: ApiService)
     {
-        this.representative = auth.isRepresentative();
     }
 
     ngOnInit()
@@ -45,47 +41,13 @@ export class HomeworksPage implements OnInit
                 until
                 long
             }
-        }`).then(result => this.homeworks = result.homeworks.filter(h => !this.isPassed(h.until)));
-    }
-
-    async setLong(event, homework)
-    {
-        homework.long = (await this.api.userMutation(`{
-            homework(id: "${homework.id}") {
-                long(long: ${event.checked})
-            }
-        }`)).homework.long;
+        }`).then(result => this.homeworks = result.homeworks.filter(h => {
+            return !this.isPassed(h.until);
+        }));
     }
 
     isPassed(time: number): boolean
     {
-        return new Date(time).getDay() < new Date().getDay();
-    }
-
-    isToday(time: number): boolean
-    {
-        return new Date(time).getDay() == new Date().getDay();
-    }
-
-    isTomorrow(time: number): boolean
-    {
-        return new Date(time).getDay() - 1 == new Date().getDay();
-    }
-
-    getDate(time: number, special: boolean = true)
-    {
-        let d = new Date(time);
-
-        if (this.isTomorrow(time) && special)
-        {
-            return 'demain';
-        }
-
-        if (this.isToday(time) && special)
-        {
-            return 'aujourd\'hui';
-        }
-
-        return 'le ' + date(d, false, true, false);
+        return time < new Date().getTime();
     }
 }

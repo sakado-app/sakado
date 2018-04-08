@@ -25,14 +25,20 @@
 </ion-header>
 
 <ion-content>
-    <ion-card *ngIf="next != null">
-        <ion-card-header>
-            {{ next.subject }} <span *ngIf="next.room !== undefined && next.room != ''">- {{ next.room }}</span>
-        </ion-card-header>
+    <ion-card *ngFor="let lesson of next; let i = index" class="lesson-card">
+        <div *ngIf="lesson != null" class="lesson" [class.away-lesson]="lesson.away" [class.cancelled-lesson]="lesson.cancelled" [class.translucent]="i != 1">
+            <ion-card-header>
+                {{ lesson.subject }} <span *ngIf="lesson.room !== undefined && lesson.room != ''">- {{ lesson.room }}</span>
+            </ion-card-header>
 
-        <ion-card-content>
-            {{ getDate() }}<br/>
-            {{ next.teacher }}
-        </ion-card-content>
+            <ion-card-content>
+                {{ getDate(lesson) }}<br/>
+
+                {{ lesson.teacher }}
+                {{ lesson.away || lesson.cancelled ? '-' : '' }}
+                <span *ngIf="lesson.away" class="away-label">ABSENT</span>
+                <span *ngIf="lesson.cancelled" class="cancelled-label">ANNULÉ</span>
+            </ion-card-content>
+        </div>
     </ion-card>
 </ion-content>

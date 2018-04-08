@@ -38,7 +38,7 @@ export class AboutPage
                 url: 'https://raw.githubusercontent.com/ionic-team/ionic/master/LICENSE'
             },
             {
-                name: 'Angular 4',
+                name: 'Angular 5',
                 url: 'https://raw.githubusercontent.com/angular/angular/master/LICENSE'
             },
             {

@@ -42,6 +42,8 @@ import { RemindersPage } from '../pages/reminders/reminders';
 import { ReminderComponent } from '../components/reminder/reminder';
 import { MarkDetailPage } from '../pages/mark-detail/mark-detail';
 import { AddReminderPage } from '../pages/add-reminder/add-reminder';
+import { TomorrowPage } from '../pages/tomorrow/tomorrow';
+import { HomeworkComponent } from '../components/homework/homework';
 
 export function authServiceFactory(auth: AuthService): Function
 {
@@ -64,8 +66,10 @@ export function authServiceFactory(auth: AuthService): Function
         RemindersPage,
         MarkDetailPage,
         AddReminderPage,
+        TomorrowPage,
 
-        ReminderComponent
+        ReminderComponent,
+        HomeworkComponent
     ],
     imports: [
         BrowserModule,
@@ -89,8 +93,10 @@ export function authServiceFactory(auth: AuthService): Function
         RemindersPage,
         MarkDetailPage,
         AddReminderPage,
+        TomorrowPage,
 
-        ReminderComponent
+        ReminderComponent,
+        HomeworkComponent
     ],
     providers: [
         StatusBar,

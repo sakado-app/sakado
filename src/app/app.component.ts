@@ -33,6 +33,7 @@ import { ServerService } from './server.service';
 import { HomeworksPage } from '../pages/homeworks/homeworks';
 import { ManagePage } from "../pages/manage/manage";
 import { RemindersPage } from '../pages/reminders/reminders';
+import { TomorrowPage } from '../pages/tomorrow/tomorrow';
 
 @Component({
     templateUrl: 'app.html'
@@ -42,7 +43,7 @@ export class SakadoApp implements OnInit
     @ViewChild(Nav) nav: Nav;
 
     rootPage: any;
-    pages: Array<{ title: string, component: any, auth?: boolean, homeworks?: boolean, admin?: boolean }>;
+    pages: Array<{ title: string, icon?: string, component: any, auth?: boolean, homeworks?: boolean, admin?: boolean }>;
 
     constructor(private platform: Platform, private statusBar: StatusBar, private splashScreen: SplashScreen, private push: Push, private alertCtrl: AlertController, public auth: AuthService, private server: ServerService)
     {
@@ -51,15 +52,16 @@ export class SakadoApp implements OnInit
         this.rootPage = this.auth.logged ? NextPage : LoginPage;
 
         this.pages = [
-            { title: 'Se connecter', component: LoginPage, auth: false },
-            { title: 'Prochain cours', component: NextPage, auth: true },
-            { title: 'Profs absents', component: AwayPage, auth: true },
-            { title: 'Notes', component: MarksPage, auth: true },
-            { title: 'Devoirs', component: HomeworksPage, auth: true, homeworks: true },
-            { title: 'Rappels', component: RemindersPage, auth: true },
-            { title: 'Gérer', component: ManagePage, auth: true, admin: true },
-            { title: 'Se deconnecter', component: LogoutPage, auth: true },
-            { title: 'A Propos', component: AboutPage }
+            { title: 'Se connecter', icon: 'log-in', component: LoginPage, auth: false },
+            { title: 'Prochain cours', icon: 'skip-forward', component: NextPage, auth: true },
+            { title: 'Demain', icon: 'calendar', component: TomorrowPage, auth: true },
+            { title: 'Profs absents', icon: 'happy', component: AwayPage, auth: true },
+            { title: 'Notes', icon: 'create', component: MarksPage, auth: true },
+            { title: 'Devoirs', icon: 'book', component: HomeworksPage, auth: true, homeworks: true },
+            { title: 'Rappels', icon: 'alert', component: RemindersPage, auth: true },
+            { title: 'Gérer', icon: 'build', component: ManagePage, auth: true, admin: true },
+            { title: 'Se deconnecter', icon: 'log-out', component: LogoutPage, auth: true },
+            { title: 'A Propos', icon: 'help-circle', component: AboutPage }
         ]
     }
 

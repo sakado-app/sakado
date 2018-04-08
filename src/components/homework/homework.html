@@ -1,0 +1,22 @@
+<ion-card>
+    <ion-item>
+        <h2 [class.long]="homework.long">{{ homework.subject }} <span *ngIf="homework.long">-</span> <span *ngIf="homework.long" class="long-label">LONG</span></h2>
+        <p *ngIf="homework.until">
+            Pour
+            <span [class.tomorrow]="isToday(homework.until) || isTomorrow(homework.until)">{{ getDate(homework.until) }}</span>
+            (donné {{ getDate(homework.since, false) }})
+        </p>
+        <p *ngIf="!homework.until">
+            Donné {{ getDate(homework.since, false) }}
+        </p>
+    </ion-item>
+
+    <ion-card-content>
+        <p>{{ homework.content }}</p>
+    </ion-card-content>
+
+    <ion-item *ngIf="representative && !disableEdit">
+        <ion-label>Marquer comme long</ion-label>
+        <ion-checkbox id="long" [checked]="homework.long" (ionChange)="setLong($event, homework)"></ion-checkbox>
+    </ion-item>
+</ion-card>

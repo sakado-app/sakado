@@ -12,7 +12,8 @@
   <ion-content>
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" [class.hidden]="(p.auth !== undefined && p.auth !== auth.logged) || (p.admin !== undefined && (auth.logged ? p.admin !== auth.user.admin : false)) || (p.homeworks !== undefined && (auth.logged ? !this.auth.user.homeworksEnabled : false))" (click)="openPage(p)">
-        {{ p.title }}
+          <ion-icon class="nav-icon" name="{{ p.icon }}"></ion-icon>
+          <span class="nav-title">{{ p.title }}</span>
       </button>
     </ion-list>
   </ion-content>

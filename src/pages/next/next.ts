@@ -25,7 +25,7 @@ import { date, rangeHour } from '../../app/util';
 })
 export class NextPage implements OnInit
 {
-    next = null;
+    next = [];
 
     constructor(private api: ApiService)
     {
@@ -45,10 +45,10 @@ export class NextPage implements OnInit
         }`).then(result => this.next = result.nextLesson);
     }
 
-    getDate()
+    getDate(lesson)
     {
-        let from = new Date(this.next.from);
-        let to = new Date(this.next.to);
+        let from = new Date(lesson.from);
+        let to = new Date(lesson.to);
 
         return date(from) + ' ' + rangeHour(from, to);
     }
