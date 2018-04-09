@@ -72,7 +72,7 @@ export class AddReminderPage
 
         await this.api.userMutation(`{
             ${this.global ? 'class {' : ''}
-                addReminder(title: "${title}", content: "${content}", time: ${new Date(time).getTime()}) {
+                addReminder(title: "${title}", content: "${content.replace(/\n/g, '\\n')}", time: ${new Date(time).getTime()}) {
                     title
                 }
             ${this.global ? '}' : ''}
