@@ -37,6 +37,11 @@ export class ReminderComponent
         this.nav.setRoot(RemindersPage);
     }
 
+    getContent(content: string)
+    {
+        return content.replace(/\n/g, '<br/>');
+    }
+
     isToday(time: number): boolean
     {
         return new Date(time).getDay() == new Date().getDay();

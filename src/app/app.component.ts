@@ -49,13 +49,14 @@ export class SakadoApp implements OnInit
     constructor(private platform: Platform, private statusBar: StatusBar, private splashScreen: SplashScreen, private push: Push, private alertCtrl: AlertController, public auth: AuthService, private server: ServerService)
     {
         this.initializeApp();
+        let tomorrow = new Date().getHours() >= 15;
 
-        this.rootPage = this.auth.logged ? NextPage : LoginPage;
+        this.rootPage = this.auth.logged ? (tomorrow ? TomorrowPage : NextPage) : LoginPage;
 
         this.pages = [
             { title: 'Se connecter', icon: 'log-in', component: LoginPage, auth: false },
             { title: 'Prochain cours', icon: 'skip-forward', component: NextPage, auth: true },
-            { title: new Date().getHours() >= 15 ? 'Demain' : 'Aujourd\'hui', icon: 'calendar', component: TomorrowPage, auth: true },
+            { title: tomorrow ? 'Demain' : 'Aujourd\'hui', icon: 'calendar', component: TomorrowPage, auth: true },
             { title: 'Profs absents', icon: 'happy', component: AwayPage, auth: true },
             { title: 'Notes', icon: 'create', component: MarksPage, auth: true },
             { title: 'Devoirs', icon: 'book', component: HomeworksPage, auth: true, homeworks: true },
