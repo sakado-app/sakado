@@ -28,7 +28,7 @@
     <div id="away-content" *ngIf="away !== null">
         <div *ngFor="let week of away">
             <div class="week-name">{{ weekDate(week) }}</div>
-            <ion-card *ngFor="let lesson of week.content">
+            <ion-card *ngFor="let lesson of week.content" class="lesson-card" [class.away-lesson]="lesson.away" [class.cancelled-lesson]="lesson.cancelled">
                 <ion-card-header id="away-title">
                     {{ lesson.teacher }}
                     -

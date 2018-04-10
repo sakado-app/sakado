@@ -31,7 +31,10 @@ export class ServerService
 
     async load()
     {
-        await this.http.get(`https://jsonplaceholder.typicode.com/posts/1`).toPromise(); // Internet checking !
+        if (!DEBUG)
+        {
+            await this.http.get(`https://jsonplaceholder.typicode.com/posts/1`).toPromise(); // Internet checking !
+        }
 
         if (DEBUG)
         {
