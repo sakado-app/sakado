@@ -40,6 +40,8 @@
                 </ion-card-header>
                 <ion-card-content>{{ coursDate(lesson) }} <br/> <i>{{ lesson.subject }}</i></ion-card-content>
             </ion-card>
+
+            <h4 *ngIf="week === []">Pas de prof absent cette semaine</h4>
         </div>
     </div>
 </ion-content>

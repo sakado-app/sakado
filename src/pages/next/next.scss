@@ -32,11 +32,19 @@
     color: rgba(10, 10, 10, 0.4);
 }
 
-.away-label {
+*:not(.translucent) ion-card-content .away-label {
+    color: red;
+}
+
+*:not(.translucent) ion-card-content .cancelled-label {
+    color: orange;
+}
+
+.translucent ion-card-content .away-label {
     color: rgba(255, 0, 0, 0.5);
 }
 
-.cancelled-label {
+.translucent ion-card-content .cancelled-label {
     color: rgba(255, 165, 0, 0.5);
 }
 
