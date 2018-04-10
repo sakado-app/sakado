@@ -49,7 +49,7 @@ export class HomeworksPage implements OnInit
     isPassed(time: number): boolean
     {
         let date = new Date();
-        date.setDate(date.getDate() + 1);
+        date.setDate(date.getDate() - 1);
 
         return time < date.getTime();
     }

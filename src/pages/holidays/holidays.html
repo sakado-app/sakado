@@ -1,0 +1,51 @@
+<!--
+    Sakado, an app for school
+    Copyright (c) 2017-2018 Adrien 'Litarvan' Navratil
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<ion-header>
+    <ion-navbar color="primary">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Sakado - Vacances</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="holidays != null">
+        <h2 class="next-period">Prochaines vacances</h2>
+        <ion-card *ngIf="holidays.period != null">
+            <ion-item class="days-until">
+                J-{{ getDaysTo(holidays.period.from) }}
+            </ion-item>
+
+            <ion-card-header>{{ holidays.period.name }}</ion-card-header>
+            <ion-card-content>Du {{ getDate(holidays.period.from, false) }} au {{ getDate(holidays.period.to, false) }}</ion-card-content>
+        </ion-card>
+        <h5 *ngIf="holidays.period == null">C'EST LES GRANDES VACANCES MAGGLE</h5>
+
+        <h2 class="next-day">Prochain jour férié</h2>
+        <ion-card *ngIf="holidays.day != null">
+            <ion-item class="days-until">
+                J-{{ getDaysTo(holidays.day.time) }}
+            </ion-item>
+
+            <ion-card-header>{{ holidays.day.name }}</ion-card-header>
+            <ion-card-content>{{ getDate(holidays.day.time) }}</ion-card-content>
+        </ion-card>
+        <h5 *ngIf="holidays.day == null">Pas de jour férié jusqu'à la fin de l'année scolaire</h5>
+    </div>
+</ion-content>
