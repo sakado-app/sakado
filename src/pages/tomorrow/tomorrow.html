@@ -25,8 +25,8 @@
 </ion-header>
 
 <ion-content>
-    <h2>Demain</h2>
-    <h4>{{ getTomorrowDate() }}</h4>
+    <h2>{{ today ? "Aujourd'hui" : 'Demain' }}</h2>
+    <h4>{{ getTomorrowDate(tomorrow) }}</h4>
 
     <ion-card *ngFor="let lesson of timetable" class="lesson" [class.away-lesson]="lesson.away" [class.cancelled-lesson]="lesson.cancelled">
         <ion-card-header>{{ lesson.subject }} <span *ngIf="lesson.room !== undefined && lesson.room != ''">- {{ lesson.room }}</span></ion-card-header>
@@ -41,6 +41,7 @@
             <span *ngIf="lesson.cancelled" class="cancelled-label">ANNULÉ</span>
         </ion-card-content>
     </ion-card>
+    <h5 *ngIf="loaded && timetable.length == 0">Aucun cours demain</h5>
 
     <h4>Rappels</h4>
     <ion-card *ngFor="let reminder of reminders">
@@ -52,7 +53,9 @@
             {{ reminder.content }}
         </ion-card-content>
     </ion-card>
+    <h5 *ngIf="loaded && reminders.length == 0">Aucun rappels pour demain</h5>
 
     <h4>Devoirs</h4>
     <homework *ngFor="let homework of homeworks" [homework]="homework" [disableEdit]="true"></homework>
+    <h5 *ngIf="loaded && homeworks.length == 0">Aucun rappels pour demain</h5>
 </ion-content>

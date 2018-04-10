@@ -8,6 +8,11 @@ import { ApiService } from '../../app/api.service';
 })
 export class TomorrowPage implements OnInit
 {
+    today = new Date().getHours() <= 15;
+
+    loaded = false;
+
+    tomorrow;
     timetable = [];
     reminders = [];
     homeworks = [];
@@ -20,6 +25,7 @@ export class TomorrowPage implements OnInit
     {
         this.api.userQuery(`{
             tomorrow {
+                tomorrow
                 timetable {
                     subject
                     teacher
@@ -43,9 +49,12 @@ export class TomorrowPage implements OnInit
                 }
             }
         }`).then(result => {
+            this.tomorrow = result.tomorrow.tomorrow;
             this.timetable = result.tomorrow.timetable;
             this.reminders = result.tomorrow.reminders;
             this.homeworks = result.tomorrow.homeworks;
+
+            this.loaded = true;
         })
     }
 
@@ -54,11 +63,8 @@ export class TomorrowPage implements OnInit
         return rangeHour(new Date(lesson.from), new Date(lesson.to));
     }
 
-    getTomorrowDate()
+    getTomorrowDate(tomorrow)
     {
-        let tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + (tomorrow.getDay() == 6 ? 2 : 1));
-
-        return date(tomorrow);
+        return date(new Date(tomorrow));
     }
 }

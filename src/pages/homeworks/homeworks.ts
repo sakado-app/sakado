@@ -48,6 +48,9 @@ export class HomeworksPage implements OnInit
 
     isPassed(time: number): boolean
     {
-        return time < new Date().getTime();
+        let date = new Date();
+        date.setDate(date.getDate() + 1);
+
+        return time < date.getTime();
     }
 }
