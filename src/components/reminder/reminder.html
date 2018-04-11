@@ -8,6 +8,7 @@
 
     <ion-item class="reminder-date">
         Pour <span [class.tomorrow]="isToday(reminder.time) || isTomorrow(reminder.time)">{{ parseDate(reminder.time) }}</span>
+        <ion-icon *ngIf="!global && proposeDelete" class="reminder-delete" item-end name="close" (click)="remove()"></ion-icon>
     </ion-item>
 
     <ion-item class="reminder-author" *ngIf="global">

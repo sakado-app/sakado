@@ -65,7 +65,16 @@ export class TomorrowPage implements OnInit
 
     getHours()
     {
-        return new Date(this.timetable[0].from).getHours() + 'h-' + new Date(this.timetable[this.timetable.length - 1].to).getHours() + 'h';
+        let first = this.timetable[0];
+        let lastID = 1;
+        let last;
+
+        do {
+            last = this.timetable[this.timetable.length - lastID];
+            lastID++;
+        } while (this.timetable.length > lastID && (last.away || last.cancelled));
+
+        return new Date(first.from).getHours() + 'h-' + new Date(last.to).getHours() + 'h';
     }
 
     getDate(lesson)
