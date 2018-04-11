@@ -6,6 +6,8 @@ import { ServerService } from './server.service';
 @Injectable()
 export class ApiService
 {
+    encoding = ['é', 'è', 'ê', 'ô', 'î', 'û', 'É', 'È', 'Ê', 'Ô', 'Î'];
+
     constructor(private http: HttpClient, private auth: AuthService, private server: ServerService)
     {
 
@@ -29,15 +31,39 @@ export class ApiService
         `)).user;
     }
 
-    query(query: string): Promise<any>
+    async query(query: string)
     {
-        return this.http.get<any>(`${this.server.url}/graphql`, {
+        return JSON.parse(this.decode(JSON.stringify(await this.http.get<any>(`${this.server.url}/graphql`, {
             params: {
-                query: query
+                query: this.encode(query)
             },
             headers: {
                 Token: this.auth.token
             }
-        }).toPromise();
+        }).toPromise())));
+    }
+
+    encode(string)
+    {
+        let result = string;
+
+        for (let i = 0; i < this.encoding.length; i++)
+        {
+            result = result.replace(new RegExp(this.encoding[i], 'g'), `#0${i}`);
+        }
+
+        return result;
+    }
+
+    decode(string)
+    {
+        let result = string;
+
+        for (let i = 0; i < this.encoding.length; i++)
+        {
+            result = result.replace(new RegExp(`#0${i}`, 'g'), this.encoding[i]);
+        }
+
+        return result;
     }
 }
