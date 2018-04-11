@@ -34,6 +34,7 @@ import { HomeworksPage } from '../pages/homeworks/homeworks';
 import { ManagePage } from "../pages/manage/manage";
 import { RemindersPage } from '../pages/reminders/reminders';
 import { TomorrowPage } from '../pages/tomorrow/tomorrow';
+import { HolidaysPage } from '../pages/holidays/holidays';
 
 @Component({
     templateUrl: 'app.html'
@@ -48,17 +49,19 @@ export class SakadoApp implements OnInit
     constructor(private platform: Platform, private statusBar: StatusBar, private splashScreen: SplashScreen, private push: Push, private alertCtrl: AlertController, public auth: AuthService, private server: ServerService)
     {
         this.initializeApp();
+        let tomorrow = new Date().getHours() >= 15;
 
-        this.rootPage = this.auth.logged ? NextPage : LoginPage;
+        this.rootPage = this.auth.logged ? (tomorrow ? TomorrowPage : NextPage) : LoginPage;
 
         this.pages = [
             { title: 'Se connecter', icon: 'log-in', component: LoginPage, auth: false },
             { title: 'Prochain cours', icon: 'skip-forward', component: NextPage, auth: true },
-            { title: new Date().getHours() >= 15 ? 'Demain' : 'Aujourd\'hui', icon: 'calendar', component: TomorrowPage, auth: true },
+            { title: tomorrow ? 'Demain' : 'Aujourd\'hui', icon: 'calendar', component: TomorrowPage, auth: true },
             { title: 'Profs absents', icon: 'happy', component: AwayPage, auth: true },
             { title: 'Notes', icon: 'create', component: MarksPage, auth: true },
             { title: 'Devoirs', icon: 'book', component: HomeworksPage, auth: true, homeworks: true },
             { title: 'Rappels', icon: 'alert', component: RemindersPage, auth: true },
+            { title: 'Vacances', icon: 'boat', component: HolidaysPage, auth: true },
             { title: 'Gérer', icon: 'build', component: ManagePage, auth: true, admin: true },
             { title: 'Se deconnecter', icon: 'log-out', component: LogoutPage, auth: true },
             { title: 'A Propos', icon: 'help-circle', component: AboutPage }

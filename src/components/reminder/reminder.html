@@ -3,8 +3,7 @@
         {{ reminder.title }}
     </ion-card-header>
 
-    <ion-card-content>
-        {{ reminder.content }}
+    <ion-card-content [innerHTML]="getContent(reminder.content)">
     </ion-card-content>
 
     <ion-item class="reminder-date">

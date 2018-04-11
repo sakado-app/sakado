@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { date, rangeHour } from '../../app/util';
+import { date, parseHour, rangeHour } from '../../app/util';
 import { ApiService } from '../../app/api.service';
 
 @Component({
@@ -56,6 +56,16 @@ export class TomorrowPage implements OnInit
 
             this.loaded = true;
         })
+    }
+
+    getContent(content: string)
+    {
+        return content.replace(/\n/g, '<br/>');
+    }
+
+    getHours()
+    {
+        return new Date(this.timetable[0].from).getHours() + 'h-' + new Date(this.timetable[this.timetable.length - 1].to).getHours() + 'h';
     }
 
     getDate(lesson)

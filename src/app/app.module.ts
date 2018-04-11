@@ -44,6 +44,7 @@ import { MarkDetailPage } from '../pages/mark-detail/mark-detail';
 import { AddReminderPage } from '../pages/add-reminder/add-reminder';
 import { TomorrowPage } from '../pages/tomorrow/tomorrow';
 import { HomeworkComponent } from '../components/homework/homework';
+import { HolidaysPage } from '../pages/holidays/holidays';
 
 export function authServiceFactory(auth: AuthService): Function
 {
@@ -67,6 +68,7 @@ export function authServiceFactory(auth: AuthService): Function
         MarkDetailPage,
         AddReminderPage,
         TomorrowPage,
+        HolidaysPage,
 
         ReminderComponent,
         HomeworkComponent
@@ -94,6 +96,7 @@ export function authServiceFactory(auth: AuthService): Function
         MarkDetailPage,
         AddReminderPage,
         TomorrowPage,
+        HolidaysPage,
 
         ReminderComponent,
         HomeworkComponent

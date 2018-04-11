@@ -12,7 +12,7 @@
     </ion-item>
 
     <ion-card-content>
-        <p>{{ homework.content }}</p>
+        <p [innerHTML]="homework.content"></p>
     </ion-card-content>
 
     <ion-item *ngIf="representative && !disableEdit">
