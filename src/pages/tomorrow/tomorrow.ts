@@ -69,12 +69,16 @@ export class TomorrowPage implements OnInit
         let lastID = 1;
         let last;
 
+        let hasCancelled = false;
+
         do {
             last = this.timetable[this.timetable.length - lastID];
             lastID++;
+
+            if (last.cancelled) hasCancelled = true;
         } while (this.timetable.length > lastID && (last.away || last.cancelled));
 
-        return new Date(first.from).getHours() + 'h-' + new Date(last.to).getHours() + 'h' + (last.cancelled ? '?' : '');
+        return new Date(first.from).getHours() + 'h-' + new Date(last.to).getHours() + 'h' + (hasCancelled ? '?' : '');
     }
 
     getDate(lesson)

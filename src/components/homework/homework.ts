@@ -38,12 +38,18 @@ export class HomeworkComponent
 
     isToday(time: number): boolean
     {
-        return new Date(time).getDay() == new Date().getDay();
+        let today = new Date();
+        let date = new Date(time);
+
+        return date.getDate() == today.getDate() && date.getMonth() == today.getMonth();
     }
 
     isTomorrow(time: number): boolean
     {
-        return new Date(time).getDay() - 1 == new Date().getDay();
+        let today = new Date();
+        let date = new Date(time);
+
+        return date.getDate() - 1 == today.getDate() && date.getMonth() == today.getMonth();
     }
 
     getDate(time: number, special: boolean = true)
