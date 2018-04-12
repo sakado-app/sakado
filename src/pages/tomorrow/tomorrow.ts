@@ -74,7 +74,7 @@ export class TomorrowPage implements OnInit
             lastID++;
         } while (this.timetable.length > lastID && (last.away || last.cancelled));
 
-        return new Date(first.from).getHours() + 'h-' + new Date(last.to).getHours() + 'h';
+        return new Date(first.from).getHours() + 'h-' + new Date(last.to).getHours() + 'h' + (last.cancelled ? '?' : '');
     }
 
     getDate(lesson)

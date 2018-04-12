@@ -53,9 +53,9 @@
         <ion-card-content  [innerHTML]="getContent(reminder.content)">
         </ion-card-content>
     </ion-card>
-    <h5 *ngIf="loaded && reminders.length == 0">Aucun rappel pour demain</h5>
+    <h5 *ngIf="loaded && reminders.length == 0">Aucun rappel pour {{ today ? "aujourd'hui" : 'demain' }}</h5>
 
     <h4>Devoirs</h4>
     <homework *ngFor="let homework of homeworks" [homework]="homework" [disableEdit]="true"></homework>
-    <h5 *ngIf="loaded && homeworks.length == 0">Pas de devoir pour demain (yay)</h5>
+    <h5 *ngIf="loaded && homeworks.length == 0">Pas de devoir pour {{ today ? "aujourd'hui" : 'demain' }} (yay)</h5>
 </ion-content>
