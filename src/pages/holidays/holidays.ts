@@ -27,23 +27,11 @@ export class HolidaysPage implements OnInit
                     from
                     to
                 }
+                
+                untilDay
+                untilPeriod
             }
         }`).then(result => this.holidays = result.holidays);
-    }
-
-    getDaysTo(time)
-    {
-        let date = new Date(time);
-        let today = new Date();
-
-        /*let month = date.getMonth() - today.getMonth();
-        let day = date.getDate() - today.getDate();
-
-        return (month * 30) + (Math.floor(month / 2) + ((month + 1) % 2 === 0 ? 0 : (date.getMonth() % 2 == 0 ? 0 : 1))) + day;*/
-
-        let diff = Math.abs(date.getTime() - today.getTime());
-
-        return Math.ceil(diff / (1000 * 60 * 60 * 24));
     }
 
     getDate(time, weekday = true)

@@ -29,7 +29,7 @@
         <h2 class="next-period">Prochaines vacances</h2>
         <ion-card *ngIf="holidays.period != null">
             <ion-item class="days-until">
-                J-{{ getDaysTo(holidays.period.from) }}
+                J-{{ holidays.untilPeriod }}
             </ion-item>
 
             <ion-card-header>{{ holidays.period.name }}</ion-card-header>
@@ -40,7 +40,7 @@
         <h2 class="next-day">Prochain jour férié</h2>
         <ion-card *ngIf="holidays.day != null">
             <ion-item class="days-until">
-                J-{{ getDaysTo(holidays.day.time) }}
+                J-{{ holidays.untilDay }}
             </ion-item>
 
             <ion-card-header>{{ holidays.day.name }}</ion-card-header>
