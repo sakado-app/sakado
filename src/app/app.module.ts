@@ -25,7 +25,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Push } from '@ionic-native/push';
 import { LoginPage } from '../pages/login/login';
-import { AuthService } from './auth.service';
+import { ApiService } from './api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NextPage } from '../pages/next/next';
 import { AboutPage } from '../pages/about/about';
@@ -34,7 +34,6 @@ import { AwayPage } from '../pages/away/away';
 import { LicensePage } from '../pages/license/license';
 import { ServerService } from './server.service';
 import { MarksPage } from '../pages/marks/marks';
-import { ApiService } from './api.service';
 import { HomeworksPage } from '../pages/homeworks/homeworks';
 import { ManagePage } from "../pages/manage/manage";
 import { MarksDetailsPage } from '../pages/marks-details/marks-details';
@@ -46,9 +45,9 @@ import { TomorrowPage } from '../pages/tomorrow/tomorrow';
 import { HomeworkComponent } from '../components/homework/homework';
 import { HolidaysPage } from '../pages/holidays/holidays';
 
-export function authServiceFactory(auth: AuthService): Function
+export function apiServiceFactory(api: ApiService): Function
 {
-    return () => auth.refresh().catch(err => console.warn(`Couldn't refresh : ${err}`));
+    return () => api.refresh().catch(err => console.warn(`Couldn't refresh : ${err}`));
 }
 
 @NgModule({
@@ -106,13 +105,12 @@ export function authServiceFactory(auth: AuthService): Function
         SplashScreen,
         Push,
         ServerService,
-        AuthService,
         ApiService,
 
         {
             provide: APP_INITIALIZER,
-            useFactory: authServiceFactory,
-            deps: [AuthService],
+            useFactory: apiServiceFactory,
+            deps: [ApiService],
             multi: true
         },
 
