@@ -42,6 +42,7 @@ export class MarksPage implements OnInit
                 subject
                 title
                 value
+                away
                 max
                 average
                 higher

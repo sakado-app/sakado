@@ -37,10 +37,12 @@ export class MarksDetailsPage implements OnInit
     {
         this.api.userQuery(`{
             marks {
-                subject
+                name
+                average
                 marks {
                     title
                     value
+                    away
                     max
                     average
                     higher
@@ -49,23 +51,8 @@ export class MarksDetailsPage implements OnInit
                     time
                 }
             }
-            
-            averages {
-                subjects {
-                    subject
-                    value
-                }
-            }
         }`).then(result => {
             this.marks = result.marks;
-            result.averages.subjects.forEach(average => {
-                this.marks.forEach(marks => {
-                    if (marks.subject === average.subject)
-                    {
-                        marks.average = average.value;
-                    }
-                })
-            });
         });
     }
 
