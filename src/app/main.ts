@@ -21,8 +21,8 @@ import { AppModule } from './app.module';
 import { enableProdMode } from '@angular/core';
 
 export const VERSION = 'Beta 1.3.2';
-export const SERVER_URL = 'http://91.134.149.67:17334/';
-export const DEBUG = true;
+export const SERVER_URL = 'https://api.sakado.litarvan.com/';
+export const DEBUG = false;
 
 if (!DEBUG)
 {
