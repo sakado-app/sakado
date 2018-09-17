@@ -66,6 +66,27 @@ export class MarksPage implements OnInit
         this.nav.push(MarksDetailsPage);
     }
 
+    parseMark(mark)
+    {
+        if (!mark || isNaN(mark))
+        {
+            return '....';
+        }
+
+        let str = mark + '';
+
+        if (str.indexOf('.') === -1)
+        {
+            str += '.00';
+        }
+        else if (str.substring(str.indexOf('.') + 1, str.length).length == 1)
+        {
+            str += '0';
+        }
+
+        return str;
+    }
+
     getDate(mark)
     {
         return date(new Date(mark.time), false, true, false);

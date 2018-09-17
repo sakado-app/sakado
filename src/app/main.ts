@@ -20,7 +20,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app.module';
 import { enableProdMode } from '@angular/core';
 
-export const VERSION = 'Beta 1.3.2';
+export const VERSION = 'Beta 1.4.0';
 export const SERVER_URL = 'https://api.sakado.litarvan.com/';
 export const DEBUG = false;
 

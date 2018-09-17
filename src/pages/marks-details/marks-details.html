@@ -28,15 +28,15 @@
     <div id="notes-content" *ngFor="let subject of marks">
         <ion-card>
             <ion-item class="note-title">
-                <h2>{{ subject.name }} (<span class="average">{{ subject.average }}</span>)</h2>
+                <h2>{{ subject.name }} (<span class="average">{{ parseMark(subject.average) }}</span>)</h2>
             </ion-item>
 
             <ion-item>
-                <ion-row *ngFor="let mark of subject.marks" (click)="openMark(subject.subject, mark)">
+                <ion-row *ngFor="let mark of subject.marks" (click)="openMark(subject.name, mark)">
                     <ion-col>
                         <p>{{ getDate(mark) }}</p>
                     </ion-col>
-                    <ion-col *ngIf="!mark.away">
+                    <ion-col *ngIf="!mark.away" class="mark-value-label">
                         <span class="mark-value">{{ mark.value }}</span>/{{ mark.max }}
                     </ion-col>
                     <ion-col *ngIf="mark.away" class="mark-away">

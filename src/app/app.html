@@ -1,6 +1,6 @@
 <ion-menu [content]="content">
   <ion-header>
-      <img id="avatar" src="{{ auth.user == null ? 'assets/imgs/default_user.png' : 'data:image/png;base64,' + auth.user.avatar }}" />
+      <img id="avatar" src="{{ auth.user == null || !auth.user.avatar ? 'assets/imgs/default_user.png' : 'data:image/png;base64,' + auth.user.avatar }}" />
       <span id="user">
             {{ auth.user == null ? 'Non connecté' : auth.user.name }}
             <br/>

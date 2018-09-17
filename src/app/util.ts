@@ -1,4 +1,4 @@
-export function date(date: Date, hour: boolean = false, weekday: boolean = true, year: boolean = false)
+export function date(date: Date, hour: boolean = false, weekday: boolean = true, year: boolean = false, small: boolean = false)
 {
     return capitalize(date.toLocaleDateString(navigator.language, {
         weekday: weekday ? 'long' : undefined,
@@ -6,7 +6,7 @@ export function date(date: Date, hour: boolean = false, weekday: boolean = true,
         month: 'long',
         hour: hour ? 'numeric' : undefined,
         year: year ? 'numeric' : undefined
-    }));
+    }), small);
 }
 
 export function rangeHour(from: Date, to: Date)
@@ -36,12 +36,17 @@ export function pad(value: number)
     return result;
 }
 
-export function capitalize(value: string)
+export function capitalize(value: string, small: boolean)
 {
     let result = '';
 
     value.split(' ').forEach(word => {
-        result += (word.length == 1 ? word : word.charAt(0).toUpperCase() + word.slice(1)) + ' ';
+        let a = word.length == 1 ? word : word.charAt(0).toUpperCase() + word.slice(1);
+        if (small && a.length > 3) {
+            a = a.substr(0, 3) + '.';
+        }
+
+        result += a + ' ';
     });
 
     return result.substring(0, result.length - 1);

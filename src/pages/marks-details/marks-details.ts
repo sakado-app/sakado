@@ -53,6 +53,7 @@ export class MarksDetailsPage implements OnInit
             }
         }`).then(result => {
             this.marks = result.marks;
+            console.log(result.marks);
         });
     }
 
@@ -67,5 +68,26 @@ export class MarksDetailsPage implements OnInit
     getDate(mark)
     {
         return date(new Date(mark.time), false, true, false);
+    }
+
+    parseMark(mark)
+    {
+        if (!mark || isNaN(mark))
+        {
+            return '....';
+        }
+
+        let str = mark + '';
+
+        if (str.indexOf('.') === -1)
+        {
+            str += '.00';
+        }
+        else if (str.substring(str.indexOf('.') + 1, str.length).length == 1)
+        {
+            str += '0';
+        }
+
+        return str;
     }
 }

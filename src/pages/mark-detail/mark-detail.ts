@@ -17,8 +17,18 @@ export class MarkDetailPage
         this.mark = navParams.get('mark');
     }
 
+    small(a)
+    {
+        if (a.length > 17)
+        {
+            a = a.substring(0, 17) + '...';
+        }
+
+        return a;
+    }
+
     getDate(mark)
     {
-        return date(new Date(mark.time), false, true, false);
+        return date(new Date(mark.time), false, true, false, true);
     }
 }

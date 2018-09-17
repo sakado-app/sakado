@@ -31,10 +31,10 @@
         </ion-item>
 
         <ion-item class="moyenne">
-            Eleve <ion-badge item-end>{{ averages.student }}</ion-badge>
+            Eleve <ion-badge item-end>{{ parseMark(averages.student) }}</ion-badge>
         </ion-item>
         <ion-item class="moyenne">
-            Classe <ion-badge item-end>{{ averages.studentClass }}</ion-badge>
+            Classe <ion-badge item-end>{{ parseMark(averages.studentClass) }}</ion-badge>
         </ion-item>
         <button ion-item (click)="openAverages()">
             Par matières <ion-icon item-end name="arrow-forward"></ion-icon>
@@ -54,7 +54,7 @@
                     <ion-col>
                         <p>{{ getDate(mark) }}</p>
                     </ion-col>
-                    <ion-col *ngIf="!mark.away">
+                    <ion-col *ngIf="!mark.away" class="mark-value-label">
                         <span class="mark-value">{{ mark.value }}</span>/{{ mark.max }}
                     </ion-col>
                     <ion-col *ngIf="mark.away" class="mark-away">

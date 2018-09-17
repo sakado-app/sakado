@@ -66,6 +66,6 @@ export class HomeworkComponent
             return 'aujourd\'hui';
         }
 
-        return 'le ' + date(d, false, true, false);
+        return 'le ' + date(d, false, true, false, true);
     }
 }
