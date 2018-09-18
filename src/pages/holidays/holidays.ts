@@ -9,6 +9,7 @@ import { date } from '../../app/util';
 export class HolidaysPage implements OnInit
 {
     holidays = null;
+    untilPeriodWeek = 0;
 
     constructor(private api: ApiService)
     {
@@ -31,7 +32,12 @@ export class HolidaysPage implements OnInit
                 untilDay
                 untilPeriod
             }
-        }`).then(result => this.holidays = result.holidays);
+        }`).then(result => {
+            this.holidays = result.holidays;
+
+            let until = result.holidays.untilPeriod;
+            this.untilPeriodWeek = (until - (until % 7)) / 7;
+        });
     }
 
     getDate(time, weekday = true)
