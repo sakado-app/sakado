@@ -29,7 +29,7 @@
     <h4>{{ getTomorrowDate(tomorrow) }}</h4>
     <h5 *ngIf="timetable.length > 0" id="day-hours">{{ getHours() }}</h5>
 
-    <ion-card *ngFor="let lesson of timetable" class="lesson-card lesson" [class.away-lesson]="lesson.away" [class.cancelled-lesson]="lesson.cancelled">
+    <ion-card *ngFor="let lesson of timetable" class="lesson-card lesson" [class.away-lesson]="lesson.away" [class.cancelled-lesson]="lesson.cancelled" [class.before-hole]="lesson.beforeHole" [class.before-big-hole]="lesson.beforeBigHole">
         <ion-card-header>{{ lesson.subject }} <span *ngIf="lesson.room !== undefined && lesson.room != ''">- {{ lesson.room }}</span></ion-card-header>
 
         <div *ngIf="lesson.to - lesson.from > 3600000" [class.medium-lesson]="lesson.to - lesson.from == 5400000" [class.long-lesson]="lesson.to - lesson.from == 7200000">

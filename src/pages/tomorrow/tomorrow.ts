@@ -54,6 +54,23 @@ export class TomorrowPage implements OnInit
             this.reminders = result.tomorrow.reminders;
             this.homeworks = result.tomorrow.homeworks;
 
+            for (let i = 0; i < this.timetable.length; i++)
+            {
+                if (i + 1 < this.timetable.length)
+                {
+                    let diff = this.timetable[i + 1].from - this.timetable[i].to;
+
+                    if (diff > 60000 * 90)
+                    {
+                        this.timetable[i].beforeBigHole = true;
+                    }
+                    else if (diff > 60000 * 40)
+                    {
+                        this.timetable[i].beforeHole = true;
+                    }
+                }
+            }
+
             this.loaded = true;
         })
     }
