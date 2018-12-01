@@ -91,11 +91,11 @@ export class ManagePage implements OnInit
     {
         let prompt = this.alertCtrl.create({
             title: 'Ajouter un délégué',
-            message: "Entrez l'IDENTIFIANT du délégué à ajouter (ex: 'adrien.navratil')",
+            message: "Entrez le nom COMPLET du délégué à ajouter (ex: 'Adrien Navratil')",
             inputs: [
                 {
-                    name: 'username',
-                    placeholder: "Nom d'utilisateur"
+                    name: 'user',
+                    placeholder: "Nom du délégué"
                 },
             ],
             buttons: [
@@ -107,7 +107,7 @@ export class ManagePage implements OnInit
                     handler: data => {
                         this.api.userMutation(`{
                             class {
-                                addRepresentative(username: "${data.username}")
+                                addRepresentative(user: "${data.user}")
                             }
                         }`).then(result => {
                             this.representatives.push(result.class.addRepresentative);
@@ -123,7 +123,7 @@ export class ManagePage implements OnInit
     {
         this.api.userMutation(`{
             class {
-                removeRepresentative(username: "${representative}")
+                removeRepresentative(user: "${representative}")
             }
         }`).then(result => this.representatives.splice(this.representatives.indexOf(result.class.removeRepresentative), 1))
     }
