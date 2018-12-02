@@ -8,7 +8,8 @@ import { ApiService } from '../../app/api.service';
 })
 export class TomorrowPage implements OnInit
 {
-    today = new Date().getHours() <= 15;
+	private date = new Date();
+    today = this.date.getDay() !== 0 && this.date.getHours() <= 15;
 
     loaded = false;
 

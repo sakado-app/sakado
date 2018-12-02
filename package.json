@@ -1,6 +1,6 @@
 {
   "name": "sakado",
-  "version": "1.4.0-BETA",
+  "version": "1.4.1-BETA",
   "author": "Adrien 'Litarvan' Navratil <adrien1975@live.fr>",
   "homepage": "https://github.com/Litarvan",
   "license": "GPL-3.0",
@@ -40,7 +40,7 @@
     "zone.js": "0.8.18"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "3.1.6",
+    "@ionic/app-scripts": "^3.2.1",
     "typescript": "2.4.2"
   },
   "description": "The Sakado school application",

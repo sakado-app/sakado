@@ -49,7 +49,8 @@ export class SakadoApp implements OnInit
     constructor(private platform: Platform, private statusBar: StatusBar, private splashScreen: SplashScreen, private push: Push, private alertCtrl: AlertController, public auth: AuthService, private server: ServerService)
     {
         this.initializeApp();
-        let tomorrow = new Date().getHours() >= 15;
+        const date = new Date();
+        let tomorrow = date.getDay() === 0 || date.getHours() > 15;
 
         this.rootPage = this.auth.logged ? (tomorrow ? TomorrowPage : NextPage) : LoginPage;
 
