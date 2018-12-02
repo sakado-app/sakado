@@ -22,7 +22,7 @@ import { enableProdMode } from '@angular/core';
 
 export const VERSION = 'Beta 1.4.1';
 export const SERVER_URL = 'https://api.sakado.litarvan.com/';
-export const DEBUG = true;
+export const DEBUG = false;
 
 if (!DEBUG)
 {
