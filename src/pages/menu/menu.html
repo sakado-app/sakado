@@ -1,0 +1,38 @@
+<!--
+    Sakado, an app for school
+    Copyright (c) 2017-2018 Adrien 'Litarvan' Navratil
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<ion-header>
+    <ion-navbar color="primary">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Sakado - Menu de la cantine</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <h5 *ngIf="!menu">Chargement...</h5>
+    <h2 *ngIf="menu && menu.length === 0">Pas de menu de la cantine</h2>
+
+    <ion-card *ngFor="let line of (menu || [])">
+        <ion-card-content>
+            <ul>
+                <li *ngFor="let food of line">{{ food }}</li>
+            </ul>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

@@ -15,18 +15,26 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../app/api.service';
+import { AlertController, LoadingController } from 'ionic-angular';
 
-import { AppModule } from './app.module';
-import { enableProdMode } from '@angular/core';
-
-export const VERSION = 'Beta 1.4.1';
-export const SERVER_URL = 'https://api.sakado.litarvan.com/';
-export const DEBUG = true;
-
-if (!DEBUG)
+@Component({
+    selector: 'page-menu',
+    templateUrl: 'menu.html'
+})
+export class MenuPage implements OnInit
 {
-    enableProdMode();
-}
+    menu = null;
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+    constructor(private api: ApiService)
+    {
+    }
+
+    ngOnInit()
+    {
+        this.api.userQuery(`{
+            menu
+        }`).then(result => this.menu = result.menu || []);
+    }
+}

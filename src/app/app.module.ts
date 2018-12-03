@@ -45,6 +45,7 @@ import { AddReminderPage } from '../pages/add-reminder/add-reminder';
 import { TomorrowPage } from '../pages/tomorrow/tomorrow';
 import { HomeworkComponent } from '../components/homework/homework';
 import { HolidaysPage } from '../pages/holidays/holidays';
+import { MenuPage } from '../pages/menu/menu';
 
 export function authServiceFactory(auth: AuthService): Function
 {
@@ -69,6 +70,7 @@ export function authServiceFactory(auth: AuthService): Function
         AddReminderPage,
         TomorrowPage,
         HolidaysPage,
+        MenuPage,
 
         ReminderComponent,
         HomeworkComponent
@@ -97,6 +99,7 @@ export function authServiceFactory(auth: AuthService): Function
         AddReminderPage,
         TomorrowPage,
         HolidaysPage,
+        MenuPage,
 
         ReminderComponent,
         HomeworkComponent
