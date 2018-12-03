@@ -32,16 +32,25 @@
             </ion-item>
 
             <ion-item>
+                <ion-row>
+                    <ion-col><p>Moyenne de la classe</p></ion-col>
+                    <ion-col><span class="mark-value">{{ subject.studentClassAverage }}</span>/20</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col><p>Meilleure moyenne</p></ion-col>
+                    <ion-col><span class="mark-value">{{ subject.maxAverage }}</span>/20</ion-col>
+                </ion-row>
+                <ion-row class="small-margin">
+                    <ion-col><p>Pire moyenne</p></ion-col>
+                    <ion-col><span class="mark-value">{{ subject.minAverage }}</span>/20</ion-col>
+                </ion-row>
+
                 <ion-row *ngFor="let mark of subject.marks" (click)="openMark(subject.name, mark)">
-                    <ion-col>
-                        <p>{{ getDate(mark) }}</p>
-                    </ion-col>
+                    <ion-col><p>{{ getDate(mark) }}</p></ion-col>
                     <ion-col *ngIf="!mark.away" class="mark-value-label">
                         <span class="mark-value">{{ mark.value }}</span>/{{ mark.max }}
                     </ion-col>
-                    <ion-col *ngIf="mark.away" class="mark-away">
-                        Absent
-                    </ion-col>
+                    <ion-col *ngIf="mark.away" class="mark-away">Absent</ion-col>
                 </ion-row>
             </ion-item>
         </ion-card>

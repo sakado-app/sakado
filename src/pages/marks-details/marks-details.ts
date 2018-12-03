@@ -39,6 +39,10 @@ export class MarksDetailsPage implements OnInit
             marks {
                 name
                 average
+                studentClassAverage
+                minAverage
+                maxAverage
+                
                 marks {
                     title
                     value
@@ -67,7 +71,7 @@ export class MarksDetailsPage implements OnInit
 
     getDate(mark)
     {
-        return date(new Date(mark.time), false, true, false);
+        return date(new Date(mark.time), false, true, false, true);
     }
 
     parseMark(mark)

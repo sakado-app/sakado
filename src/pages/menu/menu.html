@@ -28,11 +28,14 @@
     <h5 *ngIf="!menu">Chargement...</h5>
     <h2 *ngIf="menu && menu.length === 0">Pas de menu de la cantine</h2>
 
-    <ion-card *ngFor="let line of (menu || [])">
-        <ion-card-content>
-            <ul>
-                <li *ngFor="let food of line">{{ food }}</li>
-            </ul>
-        </ion-card-content>
-    </ion-card>
+    <ion-item-group *ngFor="let line of (menu || []); let i = index">
+        <ion-item-divider color="light">{{
+                                            i === 0 ? 'Entrée' :
+                                            i === 1 ? 'Plat' :
+                                            i === 2 ? 'Accompagnement' :
+                                            i === 3 ? 'Fromage' :
+                                            i === 4 ? 'Dessert' : 'Plus'
+                                        }}</ion-item-divider>
+        <ion-item *ngFor="let food of line">{{ food }}</ion-item>
+    </ion-item-group>
 </ion-content>
