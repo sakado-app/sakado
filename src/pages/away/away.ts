@@ -51,7 +51,13 @@ export class AwayPage implements OnInit
             }
         }`).then(result =>
         {
-            return this.away = result.away;
+            const today = new Date();
+            today.setHours(0);
+
+            this.away = result.away.map(w => {
+                w.content = w.content.filter(l => l.from > today.getTime());
+                return w;
+            });
         });
     }
 

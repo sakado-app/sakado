@@ -45,8 +45,8 @@ export class AuthService
 
         if (result['success'])
         {
-            localStorage.setItem('sakado.token', this.token);
             this.token = result['token'];
+            localStorage.setItem('sakado.token', this.token);
 
             return true;
         }

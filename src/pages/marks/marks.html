@@ -30,14 +30,14 @@
             <h1>{{ averages ? 'Moyennes' : 'Notes' }}</h1>
         </ion-item>
 
-        <template *ngIf="averages">
+        <div *ngIf="averages">
             <ion-item class="moyenne">
                 Eleve <ion-badge item-end>{{ parseMark(averages.student) }}</ion-badge>
             </ion-item>
             <ion-item class="moyenne">
                 Classe <ion-badge item-end>{{ parseMark(averages.studentClass) }}</ion-badge>
             </ion-item>
-        </template>
+        </div>
         <button ion-item (click)="openAverages()">
             Toutes les notes <ion-icon item-end name="arrow-forward" ios="none"></ion-icon>
         </button>

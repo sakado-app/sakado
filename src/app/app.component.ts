@@ -36,6 +36,7 @@ import { RemindersPage } from '../pages/reminders/reminders';
 import { TomorrowPage } from '../pages/tomorrow/tomorrow';
 import { HolidaysPage } from '../pages/holidays/holidays';
 import { MenuPage } from '../pages/menu/menu';
+import { TimetablePage } from '../pages/timetable/timetable';
 
 @Component({
     templateUrl: 'app.html'
@@ -60,6 +61,7 @@ export class SakadoApp implements OnInit
             { title: 'Prochain cours', icon: 'skip-forward', component: NextPage, auth: true },
             { title: tomorrow ? 'Demain' : 'Aujourd\'hui', icon: 'calendar', component: TomorrowPage, auth: true },
             { title: 'Profs absents', icon: 'happy', component: AwayPage, auth: true },
+            { title: 'Emploi du temps', icon: 'calendar', component: TimetablePage, auth: true },
             { title: 'Notes', icon: 'create', component: MarksPage, auth: true },
             { title: 'Devoirs', icon: 'book', component: HomeworksPage, auth: true, homeworks: true },
             { title: 'Rappels', icon: 'alert', component: RemindersPage, auth: true },

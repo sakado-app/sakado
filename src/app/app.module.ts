@@ -47,35 +47,50 @@ import { HomeworkComponent } from '../components/homework/homework';
 import { HolidaysPage } from '../pages/holidays/holidays';
 import { MenuPage } from '../pages/menu/menu';
 import { EstablishmentsPage } from "../pages/establishment/establishments";
+import { TimetablePage } from '../pages/timetable/timetable';
 
 export function authServiceFactory(auth: AuthService): Function
 {
     return () => auth.refresh().catch(err => console.warn(`Couldn't refresh : ${err}`));
 }
 
+const pages = [
+    LoginPage,
+    NextPage,
+    AboutPage,
+    LogoutPage,
+    AwayPage,
+    LicensePage,
+    MarksPage,
+    MarksDetailsPage,
+    HomeworksPage,
+    ManagePage,
+    RemindersPage,
+    MarkDetailPage,
+    AddReminderPage,
+    TomorrowPage,
+    HolidaysPage,
+    MenuPage,
+    EstablishmentsPage,
+    TimetablePage
+];
+
+const components = [
+    ReminderComponent,
+    HomeworkComponent
+];
+
+const services = [
+    ServerService,
+    AuthService,
+    ApiService
+];
+
 @NgModule({
     declarations: [
         SakadoApp,
-        LoginPage,
-        NextPage,
-        AboutPage,
-        LogoutPage,
-        AwayPage,
-        LicensePage,
-        MarksPage,
-        MarksDetailsPage,
-        HomeworksPage,
-        ManagePage,
-        RemindersPage,
-        MarkDetailPage,
-        AddReminderPage,
-        TomorrowPage,
-        HolidaysPage,
-        MenuPage,
-        EstablishmentsPage,
-
-        ReminderComponent,
-        HomeworkComponent
+        ...pages,
+        ...components
     ],
     imports: [
         BrowserModule,
@@ -86,34 +101,14 @@ export function authServiceFactory(auth: AuthService): Function
     bootstrap: [IonicApp],
     entryComponents: [
         SakadoApp,
-        LoginPage,
-        NextPage,
-        AboutPage,
-        LogoutPage,
-        AwayPage,
-        LicensePage,
-        MarksPage,
-        MarksDetailsPage,
-        HomeworksPage,
-        ManagePage,
-        RemindersPage,
-        MarkDetailPage,
-        AddReminderPage,
-        TomorrowPage,
-        HolidaysPage,
-        MenuPage,
-        EstablishmentsPage,
-
-        ReminderComponent,
-        HomeworkComponent
+        ...pages,
+        ...components
     ],
     providers: [
         StatusBar,
         SplashScreen,
         Push,
-        ServerService,
-        AuthService,
-        ApiService,
+        ...services,
 
         {
             provide: APP_INITIALIZER,
