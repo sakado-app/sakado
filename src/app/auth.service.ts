@@ -34,22 +34,37 @@ export class AuthService
     {
     }
 
-    async login(username: string, password: string, establishment: string): Promise<boolean>
+    async login(username: string, password: string, establishment: string, method: string): Promise<boolean>
     {
         let result = await this.http.get(`${this.server.url}/auth/login`, {
             params: {
-                username: username,
-                password: password,
-                establishment: establishment,
+                username, password, establishment, method,
                 deviceToken: this.deviceToken
             }
         }).toPromise();
 
         if (result['success'])
         {
-            await this.log(result);
             localStorage.setItem('sakado.token', this.token);
+            this.token = result['token'];
 
+            return true;
+        }
+
+        throw new Error(result['message']);
+    }
+
+    async fetch(): Promise<any>
+    {
+        let result = await this.http.get(`${this.server.url}/auth/fetch`, {
+            headers: {
+                Token: this.token
+            }
+        }).toPromise();
+
+        if (result['success'])
+        {
+            await this.log(result);
             return true;
         }
 
@@ -80,7 +95,7 @@ export class AuthService
         {
             let result = await this.http.get(`${this.server.url}/auth/validate`, {
                 headers: {
-                    token: token
+                    Token: token
                 }
             }).toPromise();
 
@@ -103,7 +118,7 @@ export class AuthService
     {
         await this.http.get(`${this.server.url}/auth/logout`, {
             headers: {
-                token: this.token
+                Token: this.token
             }
         }).toPromise();
 
@@ -134,7 +149,10 @@ export class AuthService
             }
         }).toPromise()).user;
 
-        this.token = result['token'];
+        if (result['token']) {
+            this.token = result['token'];
+        }
+
         this.logged = true;
     }
 

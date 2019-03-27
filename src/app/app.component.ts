@@ -35,6 +35,7 @@ import { ManagePage } from "../pages/manage/manage";
 import { RemindersPage } from '../pages/reminders/reminders';
 import { TomorrowPage } from '../pages/tomorrow/tomorrow';
 import { HolidaysPage } from '../pages/holidays/holidays';
+import { MenuPage } from '../pages/menu/menu';
 
 @Component({
     templateUrl: 'app.html'
@@ -62,6 +63,7 @@ export class SakadoApp implements OnInit
             { title: 'Notes', icon: 'create', component: MarksPage, auth: true },
             { title: 'Devoirs', icon: 'book', component: HomeworksPage, auth: true, homeworks: true },
             { title: 'Rappels', icon: 'alert', component: RemindersPage, auth: true },
+            { title: 'Menu de la cantine', icon: 'restaurant', component: MenuPage, auth: true },
             { title: 'Vacances', icon: 'boat', component: HolidaysPage, auth: true },
             { title: 'Gérer', icon: 'build', component: ManagePage, auth: true, admin: true },
             { title: 'Se deconnecter', icon: 'log-out', component: LogoutPage, auth: true },

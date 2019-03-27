@@ -15,20 +15,26 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../app/api.service';
+import { AlertController, LoadingController } from 'ionic-angular';
 
-.note-title > div:nth-child(1) > div:nth-child(1) > ion-label:nth-child(1) {
-    margin-bottom: 0;
-}
+@Component({
+    selector: 'page-menu',
+    templateUrl: 'menu.html'
+})
+export class MenuPage implements OnInit
+{
+    menu = null;
 
-.average {
-    font-weight: bold;
-}
+    constructor(private api: ApiService)
+    {
+    }
 
-.mark-value-label {
-    margin-top: -1px;
-    margin-left: 20px;
-}
-
-.small-margin {
-    margin-bottom: 15px;
+    ngOnInit()
+    {
+        this.api.userQuery(`{
+            menu
+        }`).then(result => this.menu = result.menu || []);
+    }
 }
