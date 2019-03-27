@@ -25,19 +25,21 @@
 </ion-header>
 
 <ion-content>
-    <ion-card id="averages" *ngIf="averages !== undefined">
+    <ion-card id="averages">
         <ion-item>
-            <h1>Moyenne</h1>
+            <h1>{{ averages ? 'Moyennes' : 'Notes' }}</h1>
         </ion-item>
 
-        <ion-item class="moyenne">
-            Eleve <ion-badge item-end>{{ parseMark(averages.student) }}</ion-badge>
-        </ion-item>
-        <ion-item class="moyenne">
-            Classe <ion-badge item-end>{{ parseMark(averages.studentClass) }}</ion-badge>
-        </ion-item>
+        <template *ngIf="averages">
+            <ion-item class="moyenne">
+                Eleve <ion-badge item-end>{{ parseMark(averages.student) }}</ion-badge>
+            </ion-item>
+            <ion-item class="moyenne">
+                Classe <ion-badge item-end>{{ parseMark(averages.studentClass) }}</ion-badge>
+            </ion-item>
+        </template>
         <button ion-item (click)="openAverages()">
-            Par matières <ion-icon item-end name="arrow-forward"></ion-icon>
+            Toutes les notes <ion-icon item-end name="arrow-forward"></ion-icon>
         </button>
     </ion-card>
 
