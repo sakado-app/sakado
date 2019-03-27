@@ -49,7 +49,10 @@ export class AwayPage implements OnInit
                     to
                 }
             }
-        }`).then(result => this.away = result.away);
+        }`).then(result =>
+        {
+            return this.away = result.away;
+        });
     }
 
     coursDate(lesson)

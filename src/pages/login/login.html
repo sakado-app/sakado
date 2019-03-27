@@ -41,12 +41,9 @@
     </ion-item>
     <ion-item class="establishment-item">
       <ion-label floating>Etablissement</ion-label>
-      <ion-select [(ngModel)]="selectedEstablishment" [ngModelOptions]="{standalone: true}" [disabled]="logging">
-        <ion-option value="loading">Selectionner...</ion-option>
-        <ion-option *ngFor="let establishment of establishments" [value]="establishment">{{ establishment }}</ion-option>
-      </ion-select>
+        <ion-input id="establishment" [value]="(method ? ('[' + method + '] ') : '') + establishment" (click)="selectEstablishment()" readonly></ion-input>
     </ion-item>
 
-    <button ion-button [disabled]="loginForm.invalid || selectedEstablishment == 'loading' || logging" id="login">Se Connecter</button>
+    <button ion-button [disabled]="loginForm.invalid || !method || logging" id="login">Se Connecter</button>
   </form>
 </ion-content>

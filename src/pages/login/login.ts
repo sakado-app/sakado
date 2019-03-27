@@ -15,12 +15,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { AfterViewInit, Component, OnInit, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, NavController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../app/auth.service';
 import { NextPage } from '../next/next';
 import { ApiService } from '../../app/api.service';
+import { EstablishmentsPage } from "../establishment/establishments";
 
 @Component({
     selector: 'page-login',
@@ -29,8 +30,8 @@ import { ApiService } from '../../app/api.service';
 export class LoginPage implements OnInit, AfterViewInit
 {
     logging = false;
-    establishments = [];
-    selectedEstablishment = 'loading';
+    establishment = 'Selectionner...';
+    method = '';
 
     loginForm = new FormGroup({
         username: new FormControl('', [
@@ -59,19 +60,13 @@ export class LoginPage implements OnInit, AfterViewInit
 
     async ngOnInit()
     {
-        try
-        {
-            this.establishments = (await this.api.query(`
-                query {
-                    establishments
-                }
-            `)).establishments || [];
-        }
-        catch (e)
-        {
-        }
+        this.method = localStorage.getItem('sakado.method');
 
-        this.selectedEstablishment = localStorage.getItem('sakado.establishment') || 'loading';
+        if (this.method) {
+            this.establishment = localStorage.getItem('sakado.establishment') || this.establishment;
+        } else {
+            localStorage.removeItem('sakado.establishment'); // Old version
+        }
     }
 
     login()
@@ -85,11 +80,21 @@ export class LoginPage implements OnInit, AfterViewInit
         const username = this.loginForm.get('username').value;
         const password = this.loginForm.get('password').value;
 
-        localStorage.setItem('sakado.establishment', this.selectedEstablishment);
+        localStorage.setItem('sakado.establishment', this.establishment);
+        localStorage.setItem('sakado.method', this.method);
         localStorage.setItem('sakado.username', username);
 
         (async () => {
-            let result = await this.auth.login(username, password, this.selectedEstablishment);
+            let result = await this.auth.login(username, password, this.establishment, this.method);
+
+            if (result == false)
+            {
+                throw new Error('Erreur inconnue');
+            }
+
+            loading.setContent('Chargement des données...');
+
+            result = await this.auth.fetch();
 
             if (result == false)
             {
@@ -110,6 +115,16 @@ export class LoginPage implements OnInit, AfterViewInit
             }).present();
 
             this.logging = false;
+        });
+    }
+
+    selectEstablishment()
+    {
+        this.navCtrl.push(EstablishmentsPage, {
+            onSelect: (establishment, method) => {
+                this.establishment = establishment;
+                this.method = method;
+            }
         });
     }
 }
