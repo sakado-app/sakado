@@ -51,13 +51,23 @@ export class MarksPage implements OnInit
                 time
             }
             
-            averages {
-                student
-                studentClass
+            periods {
+                id
+                isDefault
+            }
+            
+            marks {
+                period
+                averages {
+                    student
+                    studentClass
+                }
             }
         }`).then(result => {
+            const period = result.periods.find(p => p.isDefault);
+
+            this.averages = result.marks.find(p => p.period === period.id).averages;
             this.marks = result.lastMarks;
-            this.averages = result.averages;
         });
     }
 

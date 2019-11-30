@@ -36,28 +36,36 @@ export class MarksDetailsPage implements OnInit
     ngOnInit()
     {
         this.api.userQuery(`{
+            periods {
+                id
+                isDefault
+            }
+            
             marks {
-                name
-                average
-                studentClassAverage
-                minAverage
-                maxAverage
-                
+                period
                 marks {
-                    title
-                    value
-                    away
-                    max
+                    name
                     average
-                    higher
-                    lower
-                    coefficient
-                    time
+                    studentClassAverage
+                    minAverage
+                    maxAverage
+                    
+                    marks {
+                        title
+                        value
+                        away
+                        max
+                        average
+                        higher
+                        lower
+                        coefficient
+                        time
+                    }
                 }
             }
         }`).then(result => {
-            this.marks = result.marks;
-            console.log(result.marks);
+            const period = result.periods.find(p => p.isDefault);
+            this.marks = result.marks.find(p => p.period === period.id).marks;
         });
     }
 
