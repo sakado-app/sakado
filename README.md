@@ -2,10 +2,8 @@
 
 ## Screenshots
 
-<img src="https://cdn.discordapp.com/attachments/447725868140331019/664228224376635470/unknown.png" width="350" />
-<img src="https://cdn.discordapp.com/attachments/357605085942906902/650421800131493889/Screenshot_20191129-040440_Sakado.png" width="350" />
-<img src="https://cdn.discordapp.com/attachments/357605085942906902/649808256725680161/Screenshot_20191129-040529_Sakado.png" width="350" />
-<img src="https://cdn.discordapp.com/attachments/357605085942906902/649808257225064449/Screenshot_20191129-040533_Sakado.png" width="350" />
+<img src="https://cdn.discordapp.com/attachments/447725868140331019/664228224376635470/unknown.png" width="300" /> <img src="https://cdn.discordapp.com/attachments/357605085942906902/650421800131493889/Screenshot_20191129-040440_Sakado.png" width="300" />
+<img src="https://cdn.discordapp.com/attachments/357605085942906902/649808256725680161/Screenshot_20191129-040529_Sakado.png" width="300" /> <img src="https://cdn.discordapp.com/attachments/357605085942906902/649808257225064449/Screenshot_20191129-040533_Sakado.png" width="300" />
 
 ## Building
 
